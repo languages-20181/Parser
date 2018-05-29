@@ -19,13 +19,13 @@ public class Lexer {
         queueAux = new LinkedList<>();
         columna = 0;
         fila = 0;
-        output = new File("output.txt");
+        output = new File("tokens.txt");
         writer = new BufferedWriter(new FileWriter(output));
 
         iniciarOperadoresEspeciales();
         iniciarPalabaraReservada();
         try {
-            System.out.println(entrada(archivoEntrada));
+            System.out.println("Lexer: " + entrada(archivoEntrada));
         } catch (FileNotFoundException e) {
 
             // TODO Auto-generated catch block
@@ -215,10 +215,10 @@ public class Lexer {
 
         if (operadoresEspecialesDobles.containsKey(operadorEspecial)) {
 
-            System.out.println("<" +
+            /*System.out.println("<" +
                     operadoresEspecialesDobles.get(operadorEspecial) +
                     "," + Integer.toString(fila) +
-                    "," + Integer.toString(columna) +">");
+                    "," + Integer.toString(columna) +">");*/
             filePrintLine("<" +
                     operadoresEspecialesDobles.get(operadorEspecial) +
                     "," + Integer.toString(fila) +
@@ -226,10 +226,10 @@ public class Lexer {
 
         }else {
 
-            System.out.println("<" +
+            /*System.out.println("<" +
                     operadoresEspeciales.get(operadorEspecial) +
                     "," + Integer.toString(fila) +
-                    "," + Integer.toString(columna) +">");
+                    "," + Integer.toString(columna) +">");*/
             filePrintLine("<" +
                     operadoresEspeciales.get(operadorEspecial) +
                     "," + Integer.toString(fila) +
@@ -275,7 +275,7 @@ public class Lexer {
 
     private static String[] seleccionarToken(String[] substring) throws IOException{
 
-        System.out.println(substring[0]+" "+substring[1]);
+        //System.out.println(substring[0]+" "+substring[1]);
 
         String token = substring[0];
 
