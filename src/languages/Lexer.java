@@ -10,6 +10,15 @@ import java.util.Queue;
 
 public class Lexer {
 
+    private static HashMap <String, String> operadoresEspecialesDobles;
+    private static HashMap <String,String> operadoresEspeciales;
+    private static ArrayList <String> palabraReservada;
+    private static Queue<String> queueAux;
+    private static int columna;
+    private static int fila;
+    private static File output;
+    private static BufferedWriter writer;
+    private static ArrayList<Token> tokens;
 
     public Lexer(String archivoEntrada) throws IOException {
 
@@ -21,6 +30,7 @@ public class Lexer {
         fila = 0;
         output = new File("tokens.txt");
         writer = new BufferedWriter(new FileWriter(output));
+        tokens = new ArrayList<>();
 
         iniciarOperadoresEspeciales();
         iniciarPalabaraReservada();
@@ -224,6 +234,12 @@ public class Lexer {
                     "," + Integer.toString(fila) +
                     "," + Integer.toString(columna) +">");
 
+            tokens.add(new Token(
+                    operadoresEspecialesDobles.get(operadorEspecial),
+                    fila,
+                    columna
+            ));
+
         }else {
 
             /*System.out.println("<" +
@@ -234,6 +250,12 @@ public class Lexer {
                     operadoresEspeciales.get(operadorEspecial) +
                     "," + Integer.toString(fila) +
                     "," + Integer.toString(columna) +">");
+
+            tokens.add(new Token(
+                    operadoresEspeciales.get(operadorEspecial),
+                    fila,
+                    columna
+            ));
 
         }
     }
@@ -338,6 +360,13 @@ public class Lexer {
                 salida +
                 "," + Integer.toString(fila) +
                 "," + Integer.toString(columna) +">");
+
+        String[] id = salida.split(",");
+
+        if(id.length > 1)
+            tokens.add(new Token(id[0],id[1],fila,columna));
+        else
+            tokens.add(new Token(id[0],fila,columna));
     }
 
     public static boolean esCadena(String substring) {
@@ -431,12 +460,8 @@ public class Lexer {
         return "id";
     }
 
-    private static HashMap <String, String> operadoresEspecialesDobles;
-    private static HashMap <String,String> operadoresEspeciales;
-    private static ArrayList <String> palabraReservada;
-    private static Queue<String> queueAux;
-    private static int columna;
-    private static int fila;
-    private static File output;
-    private static BufferedWriter writer;
+    public static ArrayList<Token> getTokens()
+    {
+        return tokens;
+    }
 }
