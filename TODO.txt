@@ -1,0 +1,3 @@
+Actualizar analizador lexico
+Imprimir errores
+Implementar Gramática

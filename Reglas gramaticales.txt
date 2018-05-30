@@ -1,0 +1,95 @@
+No terminales
+
+parse: Fuente de entrada
+from_input: Ingreso por consola
+from_file: Ingreso por archivo
+stat: compound | simple
+compound_stat: if|for|while|funcion {bloque de codigo}
+simple_stat: Declaracion simple
+assignment: a = b + c
+if_stat: bloque if
+while_stat: bloque while
+for_stat: bloque for
+log: print()
+funcion: bloque funcion
+importar: import
+retornar: return
+condition_block: ???
+stat_block: {bloque de codigo}
+array: [1,2,3]
+accessarray: myArray[2]
+variable: diccionario.key(5,7,5) Tiene valor
+parametro: Parametro de una funcion, se puede asignar variables en esta, igual que en Python
+expr: 1+2 | 1-2 | 4 > 3
+atom: Valor atomico, por ejemplo 12, "Hola mundo", {a:1,b:2,c:3}
+objeto: {a:1,b:2,c:3}
+keyvalue: nombre:"Juan"
+
+Terminales
+
+OR : '||';
+AND : '&&';
+EQ : '==';
+NEQ : '!=';
+GT : '>';
+LT : '<';
+GTEQ : '>=';
+LTEQ : '<=';
+PLUS : '+';
+MINUS : '-';
+MULT : '*';
+DIV : '/';
+MOD : '%';
+POW : '^';
+NOT : '!';
+
+ASSIGN : '=';
+OPAR : '(';
+CPAR : ')';
+OBRACE : '{';
+CBRACE : '}';
+OKEY : '[';
+CKEY : ']';
+COMMA : ',';
+POINTS: ':';
+TRUE : 'true';
+FALSE : 'false';
+NIL : 'nil';
+IF : 'if';
+ELSE : 'else';
+WHILE : 'while';
+LOG : 'log';
+FOR : 'for';
+IN : 'in';
+FUNCION: 'funcion';
+END: 'end';
+RETORNO: 'retorno';
+IMPORT: 'importar';
+FROM: 'desde';
+ASTERISC: 'todo';
+POINT: '.';
+ID
+ : [a-zA-Z_] [a-zA-Z_0-9]*
+ ;
+INT
+ : [0-9]+
+ ;
+FLOAT
+ : [0-9]+ '.' [0-9]*
+ | '.' [0-9]+
+ ;
+STRING
+ : '"' (~["\r\n] | '""')* '"'
+ ;
+COMMENT
+ : '#' ~[\r\n]* -> skip
+ ;
+SPACE
+ : [ \t\r] -> skip
+ ;
+NEWLINE
+ : [\n]
+ ;
+OTHER
+ : .
+ ;

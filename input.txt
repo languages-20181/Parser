@@ -1,4 +1,3 @@
-# Declaracion funciones
-funcion suma(x,y)
-retorno (x+y)
+funcion suma (x,y)
+ returno (x+y)
 end
