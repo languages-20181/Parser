@@ -50,53 +50,60 @@ public class Lexer {
         }
     }
 
-    public void iniciarOperadoresEspeciales() {
+    public void iniciarOperadoresEspeciales()
+    {
+        operadoresEspecialesDobles.put("||","OR");
+        operadoresEspecialesDobles.put("&&","AND");
+        operadoresEspecialesDobles.put("==","EQ");
+        operadoresEspecialesDobles.put("!=","NEQ");
 
-        operadoresEspeciales.put("{","token_llave_izq");
-        operadoresEspeciales.put("}","token_llave_der");
+        operadoresEspeciales.put(">","GT");
+        operadoresEspeciales.put("<","LT");
+
+        operadoresEspecialesDobles.put(">=","GTEQ");
+        operadoresEspecialesDobles.put("<=","LTEQ");
+
+        operadoresEspeciales.put("+","PLUS");
+        operadoresEspeciales.put("-","MINUS");
+        operadoresEspeciales.put("*","MULT");
+        operadoresEspeciales.put("/","DIV");
+        operadoresEspeciales.put("%","MOD");
+        operadoresEspeciales.put("^","POW");
+        operadoresEspeciales.put("!","NOT");
+
+        operadoresEspeciales.put("=", "ASSIGN");
+
+        operadoresEspeciales.put("{","OBRACE");
+        operadoresEspeciales.put("}","CBRACE");
 //      operadoresEspeciales.put("#","token_com"); No se considera ṕrque se analiza en el Switch (seleccionarToken)
-        operadoresEspeciales.put("[","token_cor_izq");
-        operadoresEspeciales.put("]","token_cor_der");
-        operadoresEspeciales.put("(","token_par_izq");
-        operadoresEspeciales.put(")","token_par_der");
-        operadoresEspeciales.put(">","token_mayor");
-        operadoresEspeciales.put("<","token_menor");
-        operadoresEspeciales.put("in","token_in");
-        operadoresEspeciales.put("=", "token_equal");
+        operadoresEspeciales.put("[","OKEY");
+        operadoresEspeciales.put("]","CKEY");
+        operadoresEspeciales.put("(","OPAR");
+        operadoresEspeciales.put(")","CPAR");
+        operadoresEspeciales.put(":", "POINTS");
+        operadoresEspeciales.put(",","COMMA");
+
 //      operadoresEspeciales.put(".","token_point"); No se considera porque se analiza en el Switch (seleccionarToken)
-        operadoresEspeciales.put("!","token_not");
-        operadoresEspeciales.put("+","token_mas");
-        operadoresEspeciales.put("-","token_menos");
-        operadoresEspeciales.put("*","token_mul");
-        operadoresEspeciales.put("/","token_div");
-        operadoresEspeciales.put("%","token_mod");
-        operadoresEspeciales.put("^","token_pot");
-        operadoresEspeciales.put(":", "token_colon");
-        operadoresEspeciales.put(",","token_comma");
-
-        operadoresEspecialesDobles.put(">=","token_mayor_igual");
-        operadoresEspecialesDobles.put("<=","token_menor_igual");
-        operadoresEspecialesDobles.put("!=","token_diff_num");
-        operadoresEspecialesDobles.put("&&","token_and");
-        operadoresEspecialesDobles.put("||","token_or");
-        operadoresEspecialesDobles.put("==","token_igual_num");
-
+        operadoresEspeciales.put(".","POINT");
     }
 
-    public void iniciarPalabaraReservada() {
-        palabraReservada.add("log");
+    public void iniciarPalabaraReservada()
+    {
         palabraReservada.add("true");
         palabraReservada.add("false");
-        palabraReservada.add("while");
-        palabraReservada.add("importar");
-        palabraReservada.add("log");
+        palabraReservada.add("nil");
         palabraReservada.add("if");
-        palabraReservada.add("for");
-        palabraReservada.add("funcion");
-        palabraReservada.add("retorno");
-        palabraReservada.add("end");
         palabraReservada.add("else");
-
+        palabraReservada.add("while");
+        palabraReservada.add("log");
+        palabraReservada.add("for");
+        palabraReservada.add("in");
+        palabraReservada.add("funcion");
+        palabraReservada.add("end");
+        palabraReservada.add("retorno");
+        palabraReservada.add("importar");
+        palabraReservada.add("desde");
+        palabraReservada.add("todo");
     }
 
 
