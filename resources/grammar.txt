@@ -19,7 +19,7 @@ FUNCION -> funcion id token_par_izq FUNCION2 token_par_der FUNCION3 end funcion
 FUNCION2 -> EPSILON | PARAMETRO FUNCION4
 FUNCION3 -> EPSILON | FUNCION5 FUNCION3
 FUNCION4 -> EPSILON | FUNCION6 FUNCION4
-FUNCION5 -> token_newline|STAT
+FUNCION5 -> token_newline | STAT
 FUNCION6 -> token_coma PARAMETRO
 IMPORTAR -> from id import id
 IMPORTAR -> import id IMPORTAR1
@@ -54,12 +54,12 @@ PARAMETRO2 -> EPSILON | assign EXPR
 EXPR1 -> EPSILON | OPBIN EXPR EXPR1
  OPUN -> minus | not
 OPBIN -> OPMUL | OPSUM | OPREL | OPEQ | OPLOG | pow
-OPMUL -> mult | div|mod
+OPMUL -> mult | div | mod
 OPSUM -> plus | minus
 OPREL -> lteq | gteq | lt | gt
 OPEQ -> eq | neq
 OPLOG -> and | or
- ATOM -> int | float | true | false | string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
+ ATOM -> int | float | true | false |string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
  OBJETO -> obrace OBJETO1 cbrace
 OBJETO1 -> EPSILON | KEYVALUE OBJETOA1
 OBJETOA1 -> EPSILON | OBJETOA2 OBJETOA1

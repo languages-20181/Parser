@@ -338,7 +338,8 @@ public class Parser {
      * Automatically builds LL(1) parsing table by using follow and first set
      */
     private void buildParsingTable() {
-        HashMap <String, ArrayList < Set <String> >> prediction = new HashMap<>();
+        HashMap <Rule, HashSet < String> > prediction = new HashMap<>();
+        HashSet<String> arrayP = new HashSet<>();
         for (Rule r : rules) {
             Symbol[] rightSide = r.getRightSide();
             NonTerminal leftSide = r.getLeftSide();
@@ -348,27 +349,36 @@ public class Parser {
             //for (Terminal s : firstSetForRightSide) {
             //    parsingTable.put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
             //}
+            System.out.println("REGLA: "+ r.getRuleNumber()  );
+
             System.out.println("LEFTSIDE: "+ leftSide  );
+            System.out.println("FirstSetRigthSide: "+ firstSetForRightSide  );
+            System.out.println("FollowSetLeftSide: "+ followSetForLeftSide  );
             for (int i = 0 ; i < rightSide.length ; i++){
                 System.out.print(" ------- "+rightSide[i].getName());
+
             }
             System.out.println("");
 
 
-            if (firstSetForRightSide.contains(epsilon)) {
-                ArrayList<ArrayList<String>> arr = new ArrayList<>();
+            if (firstSetForRightSide.contains(epsilon))
+            {
+                for (Terminal first: firstSetForRightSide)
+                    arrayP.add(first.getName());
 
+                arrayP.remove("EPSILON");
+                for (Terminal follow: followSetForLeftSide)
+                    arrayP.add(follow.getName());
 
-              //prediction.put(leftSide,arr.add();
-         /*       Stem.out.println("LEFTSIDE: "+ leftSide  );
-                for (int i = 0 ; i < rightSide.length ; i++){
-                    System.out.println("holaa "+rightSide[i].getName());
-                }*/
-                //for (Terminal s : followSetForLeftSide) {
-                    //parsingTable
-                      //      .put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
-                //}
+            } else
+            {
+                for (Terminal first: firstSetForRightSide)
+                    arrayP.add(first.getName());
+
             }
+            System.out.println("ArrayTest: "+ arrayP );
+            prediction.put(r,arrayP);
+            System.out.println("Prediction: "+ prediction.get(r) );
         }
     }
 
