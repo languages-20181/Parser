@@ -1,0 +1,113 @@
+PARSE -> 
+    FROM_INPUT | []
+    FROM_FILE
+FROM_INPUT -> 
+    STAT newline
+FROM_FILE -> 
+    FROM_FILE2 eof
+FROM_FILE2 -> 
+    epsilon | 
+    FROM_FILE3 FROM_FILE2
+FROM_FILE3 -> 
+    STAT | newline
+STAT -> 
+    SIMPLE_STAT | 
+    COMPOUND_STAT
+COMPOUND_STAT -> 
+    IF_STAT | 
+    WHILE_STAT | 
+    FOR_STAT | 
+    FUNCION
+SIMPLE_STAT -> 
+    ASSIGNMENT | 
+    LOG | 
+    IMPORTAR | 
+    RETORNAR | 
+    ATOM newline | 
+    other
+ASSIGNMENT -> 
+    VARIABLE assign ASSIGNMENT2
+ASSIGNMENT2 -> 
+    ASSIGNMENT | 
+    EXPR
+IF_STAT -> 
+    if CONDITION_BLOCK IF_STAT2 IF_STAT3
+IF_STAT2 -> 
+    epsilon | 
+    IF_STAT4 IF_STAT2
+IF_STAT3 -> 
+    epsilon | 
+    else STAT_BLOCK
+IF_STAT4 -> 
+    else if CONDITION_BLOCK
+WHILE_STAT -> 
+    while EXPR STAT_BLOCK
+FOR_STAT -> 
+    for id in EXPR STAT_BLOCK
+LOG -> 
+    log opar EXPR cpar
+FUNCION -> funcion id token_par_izq FUNCION2 token_par_der FUNCION3 end funcion
+FUNCION2 -> 
+    epsilon | 
+    PARAMETRO FUNCION4
+FUNCION3 -> 
+    epsilon | 
+    FUNCION5 FUNCION3
+FUNCION4 -> 
+    epsilon | 
+    FUNCION6 FUNCION4
+FUNCION5 -> 
+    token_newline|
+    STAT
+FUNCION6 -> 
+    token_coma PARAMETRO
+IMPORTAR -> 
+    from id import id
+IMPORTAR -> 
+    import id IMPORTAR1
+IMPORTAR1 -> 
+    epsilon | 
+    IMPORTAR2 IMPORTAR1
+IMPORTAR2 -> point id
+RETORNAR -> retorno opar EXPR cpar newline
+CONDITION_BLOCK -> EXPR CONDITION_BLOCK2 STAT_BLOCK
+CONDITION_BLOCK2 -> epsilon | newline
+STAT_BLOCK -> obrace STAT_BLOCK1 cbrace
+STAT_BLOCK -> STAT newline
+STAT_BLOCK1 -> epsilon | STAT_BLOCK2 STAT_BLOCK1
+STAT_BLOCK2 -> STAT | newline
+ARRAY -> okey ARRAY1 ckey
+ARRAY1 -> epsilon | EXPR ARRAY2
+ARRAY2 -> epsilon | ARRAY3 ARRAY2
+ARRAY3 -> comma EXPR
+ACCESSARRAY -> VARIABLE okey EXPR ckey
+VARIABLE -> id VARIABLE
+VAR -> VARIABLEA1 VARIABLEA2
+VARIABLEA2 -> epsilon | opar VARIABLEB1 cpar
+VARIABLEB1 -> epsilon | VARIABLEC1
+VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1VARIABLEC2 -> comma EXPR
+VARIABLEA1 -> epsilon | VARIABLEAB1 VARIABLEA1
+VARIABLEAB1 -> point id
+VAR -> VARIABLE1 okey EXPR ckey
+VARIABLE1 -> epsilon | VARIABLE2 VARIABLE1
+VARIABLE2 -> point id
+PARAMETRO -> id | PARAMETRO2
+PARAMETRO2 -> epsilon | assign EXPR
+ EXPR -> OPUN EXPR
+EXPR -> opar EXPR cpar
+EXPR -> ATOM EXPR1
+EXPR1 -> OPBIN EXPR EXPR1
+EXPR1 -> epsilon
+ OPUN -> minus | not
+OPBIN -> OPMUL | OPSUM | OPREL | OPEQ | OPLOG | pow
+OPMUL -> mult | div|mod
+OPSUM -> plus | minus
+OPREL -> lteq | gteq | lt | gt
+OPEQ -> eq | neq
+OPLOG -> and | or
+ ATOM -> int | float | true | false | string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
+ OBJETO -> obrace OBJETO1 cbrace
+OBJETO1 -> epsilon | KEYVALUE OBJETOA1
+OBJETOA1 -> epsilon | OBJETOA2 OBJETOA1
+OBJETOA2 -> comma KEYVALUE
+KEYVALUE -> id points EXP

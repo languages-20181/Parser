@@ -91,6 +91,7 @@ public class Parser {
         //performParsingAlgorithm();
     }
 
+
     /**
      * Constructs grammar rules from file
      *
@@ -104,7 +105,10 @@ public class Parser {
         int code = 1;
         int ruleNumber = 0;
         while (data.hasNext()) {
-            StringTokenizer t = new StringTokenizer(data.nextLine());
+            String nextLine = data.nextLine();
+            if (nextLine.length() == 0) continue;
+            System.out.println(nextLine);
+            StringTokenizer t = new StringTokenizer(nextLine);
             String symbolName = t.nextToken();
             if (!nameToSymbol.containsKey(symbolName)) {
                 Symbol s = new NonTerminal(code, symbolName);
