@@ -1,0 +1,78 @@
+parse -> from_input | from_file
+from_input -> stat NEWLINE
+from_file -> from_file2 EOF
+from_file2 -> EPSILON | from_file3 from_file2
+from_file3 -> stat | NEWLINE
+stat -> simple_stat | compound_stat
+compound_stat -> if_stat | while_stat | for_stat | funcion
+simple_stat -> assignment | log | importar | retornar | atom NEWLINE | OTHER
+assignment -> variable ASSIGN assignment2
+assignment2 -> assignment | expr
+if_stat -> IF condition_block if_stat2 if_stat3
+if_stat2 -> EPSILON | if_stat4 if_stat2
+if_stat3 -> EPSILON | ELSE stat_block
+if_stat4 -> ELSE IF condition_block
+while_stat -> WHILE expr stat_block
+for_stat -> FOR ID IN expr stat_block
+log -> LOG OPAR expr CPAR
+funcion -> FUNCION ID TOKEN_PAR_IZQ funcion2 TOKEN_PAR_DER funcion3 END FUNCION
+funcion2 -> EPSILON | parametro funcion4
+funcion3 -> EPSILON | funcion5 funcion3
+funcion4 -> EPSILON | funcion6 funcion4
+funcion5 -> TOKEN_NEWLINE|stat
+funcion6 -> TOKEN_COMA parametro
+importar -> FROM ID IMPORT ID
+importar -> IMPORT ID importar1
+importar1 -> EPSILON | importar2 importar1
+importar2 -> POINT ID
+retornar -> RETORNO OPAR expr CPAR NEWLINE
+condition_block -> expr condition_block2 stat_block
+condition_block2 -> EPSILON | NEWLINE
+stat_block -> OBRACE stat_block1 CBRACE
+stat_block -> stat NEWLINE
+stat_block1 -> EPSILON | stat_block2 stat_block1
+stat_block2 -> stat | NEWLINE
+array -> OKEY array1 CKEY
+array1 -> EPSILON | expr array2
+array2 -> EPSILON | array3 array2
+array3 -> COMMA expr
+accessarray -> variable OKEY expr CKEY
+variable -> ID variable
+var -> variablea1 variablea2
+variablea2 -> EPSILON | OPAR variableb1 CPAR
+variableb1 -> EPSILON | variablec1
+variablec1 -> EPSILON | variablec2 variablec1
+variablec2 -> COMMA expr
+variablea1 -> EPSILON | variableab1 variablea1
+variableab1 -> POINT ID
+var -> variable1 OKEY expr CKEY
+variable1 -> EPSILON | variable2 variable1
+variable2 -> POINT ID
+
+parametro -> ID | parametro2
+parametro2 -> EPSILON | ASSIGN expr
+expr -> expr POW expr
+expr -> MINUS expr
+expr -> NOT expr
+expr -> expr opmul expr
+expr -> expr opsum expr
+expr -> expr oprel expr
+expr -> expr opeq expr
+expr -> expr AND expr
+expr -> expr OR expr
+expr -> OPAR expr CPAR
+expr -> atom
+
+opmul -> MULT|DIV|MOD
+opsum -> PLUS|MINUS
+oprel -> LTEQ|GTEQ|LT|GT
+opeq -> EQ|NEQ
+
+atom -> INT | FLOAT | TRUE | FALSE | STRING | array | objeto | accessarray | variable | NIL
+
+objeto -> OBRACE objeto1 CBRACE
+objeto1 -> EPSILON | keyvalue objetoa1
+objetoa1 -> EPSILON | objetoa2 objetoa1
+objetoa2 -> COMMA keyvalue
+
+keyvalue -> ID POINTS expr
