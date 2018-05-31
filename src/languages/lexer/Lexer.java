@@ -1,6 +1,4 @@
-package languages;
-
-import com.sun.org.apache.xml.internal.utils.SystemIDResolver;
+package languages.lexer;
 
 import java.io.*;
 import java.util.ArrayList;

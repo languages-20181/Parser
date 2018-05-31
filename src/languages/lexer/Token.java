@@ -1,4 +1,4 @@
-package languages;
+package languages.lexer;
 
 public class Token {
     String type;
