@@ -51,12 +51,11 @@ public class Parser {
     /** Sequence of applied rules during the derivations */
     private List<Rule> sequenceOfAppliedRules;
 
-    /**
+    /*
      * Initializes a newly created {@code Parser} object
-     *
-     */
-
-    public Parser() {
+    */
+    public Parser()
+    {
         rules = new ArrayList<Rule>();
         alphabet = new HashSet<Symbol>();
         nameToSymbol = new HashMap<String, Symbol>();
@@ -75,8 +74,6 @@ public class Parser {
      *
      * @param grammarFile
      *            file with grammar rules
-     * @param list
-     *            list of tokens from the input
      * @throws FileNotFoundException
      *             if file doesn't exist
      */
@@ -88,7 +85,8 @@ public class Parser {
         System.out.println("conjunto de primeros calculado: "+ firstSet);
         calculateFollow();
         System.out.println("conjunto de siguientes calculado: "+ followSet);
-        //buildParsingTable();
+        buildParsingTable();
+        System.out.println("conjunto de prediccion calculado: "+ parsingTable);
         //input = convertTokensToStack(list);
         //performParsingAlgorithm();
     }
@@ -97,9 +95,7 @@ public class Parser {
      * Constructs grammar rules from file
      *
      * @param grammarFile
-     *            file with grammar rules
-     * @throws FileNotFoundException
-     *             if file with the specified pathname does not exist
+     *            file with grammar rule
      */
     private void parseRules(File grammarFile) throws FileNotFoundException {
         nameToSymbol.put("EPSILON", epsilon);
@@ -334,14 +330,27 @@ public class Parser {
         return list;
     }
 
-    //public static void main(String args[]) throws IOException{
-        //Parser parser = new Parser();
-        //File grammarFile = FileUtil.readGrammar("resources/grammar.txt");
-        //parser.parse(grammarFile);
-        //tokens = lexer.getTokens();
-        //for (Token x : tokens)
-        //{
-         //   System.out.println(x);
-        //}
-    //}
+    /**
+     * Automatically builds LL(1) parsing table by using follow and first set
+     */
+    private void buildParsingTable() {
+        for (Rule r : rules) {
+            Symbol[] rightSide = r.getRightSide();
+            NonTerminal leftSide = r.getLeftSide();
+            Set<Terminal> firstSetForRightSide = first(rightSide);
+            Set<Terminal> followSetForLeftSide = followSet.get(leftSide);
+
+            //for (Terminal s : firstSetForRightSide) {
+            //    parsingTable.put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
+            //}
+
+            if (firstSetForRightSide.contains(epsilon)) {
+                for (Terminal s : followSetForLeftSide) {
+                    parsingTable
+                            .put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
+                }
+            }
+        }
+    }
+
 }
