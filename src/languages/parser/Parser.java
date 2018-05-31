@@ -86,7 +86,7 @@ public class Parser {
         calculateFollow();
         System.out.println("conjunto de siguientes calculado: "+ followSet);
         buildParsingTable();
-        System.out.println("conjunto de prediccion calculado: "+ parsingTable);
+        //System.out.println("conjunto de prediccion calculado: "+ parsingTable);
         //input = convertTokensToStack(list);
         //performParsingAlgorithm();
     }
@@ -341,6 +341,8 @@ public class Parser {
         HashMap <Rule, HashSet < String> > prediction = new HashMap<>();
         HashSet<String> arrayP = new HashSet<>();
         for (Rule r : rules) {
+            prediction.clear();
+            //System.out.println("ANTES"+prediction.get(r));
             Symbol[] rightSide = r.getRightSide();
             NonTerminal leftSide = r.getLeftSide();
             Set<Terminal> firstSetForRightSide = first(rightSide);
@@ -352,8 +354,9 @@ public class Parser {
             System.out.println("REGLA: "+ r.getRuleNumber()  );
 
             System.out.println("LEFTSIDE: "+ leftSide  );
-            System.out.println("FirstSetRigthSide: "+ firstSetForRightSide  );
-            System.out.println("FollowSetLeftSide: "+ followSetForLeftSide  );
+            //System.out.println("Primeros de la dereccha: " +firstSetForRightSide);
+            //System.out.println("FirstSetRigthSide: "+ firstSetForRightSide  );
+            //System.out.println("FollowSetLeftSide: "+ followSetForLeftSide  );
             for (int i = 0 ; i < rightSide.length ; i++){
                 System.out.print(" ------- "+rightSide[i].getName());
 
@@ -363,6 +366,7 @@ public class Parser {
 
             if (firstSetForRightSide.contains(epsilon))
             {
+                //System.out.println("Tiene epsilon");
                 for (Terminal first: firstSetForRightSide)
                     arrayP.add(first.getName());
 
@@ -372,13 +376,16 @@ public class Parser {
 
             } else
             {
+                //System.out.println("SIN epsilon");
                 for (Terminal first: firstSetForRightSide)
                     arrayP.add(first.getName());
 
             }
-            System.out.println("ArrayTest: "+ arrayP );
+
+            //System.out.println("ArrayTest: "+ arrayP );
             prediction.put(r,arrayP);
             System.out.println("Prediction: "+ prediction.get(r) );
+            arrayP.clear();
         }
     }
 
