@@ -48,25 +48,22 @@ variableab1 -> POINT ID
 var -> variable1 OKEY expr CKEY
 variable1 -> EPSILON | variable2 variable1
 variable2 -> POINT ID
-
 parametro -> ID | parametro2
 parametro2 -> EPSILON | ASSIGN expr
-expr -> expr POW expr
-expr -> MINUS expr
-expr -> NOT expr
-expr -> expr opmul expr
-expr -> expr opsum expr
-expr -> expr oprel expr
-expr -> expr opeq expr
-expr -> expr AND expr
-expr -> expr OR expr
-expr -> OPAR expr CPAR
-expr -> atom
 
-opmul -> MULT|DIV|MOD
-opsum -> PLUS|MINUS
-oprel -> LTEQ|GTEQ|LT|GT
-opeq -> EQ|NEQ
+expr -> opun expr
+expr -> OPAR expr CPAR
+expr -> atom expr1
+expr1 -> opbin expr expr1
+expr1 -> EPSILON
+
+opun -> MINUS | NOT
+opbin -> opmul | opsum | oprel | opeq | oplog | POW
+opmul -> MULT | DIV|MOD
+opsum -> PLUS | MINUS
+oprel -> LTEQ | GTEQ | LT | GT
+opeq -> EQ | NEQ
+oplog -> AND | OR
 
 atom -> INT | FLOAT | TRUE | FALSE | STRING | array | objeto | accessarray | variable | NIL
 
