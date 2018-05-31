@@ -41,8 +41,7 @@ VARIABLE -> id VARIABLE
 VAR -> VARIABLEA1 VARIABLEA2
 VARIABLEA2 -> epsilon | opar VARIABLEB1 cpar
 VARIABLEB1 -> epsilon | VARIABLEC1
-VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1
-VARIABLEC2 -> comma EXPR
+VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1VARIABLEC2 -> comma EXPR
 VARIABLEA1 -> epsilon | VARIABLEAB1 VARIABLEA1
 VARIABLEAB1 -> point id
 VAR -> VARIABLE1 okey EXPR ckey
@@ -50,26 +49,21 @@ VARIABLE1 -> epsilon | VARIABLE2 VARIABLE1
 VARIABLE2 -> point id
 PARAMETRO -> id | PARAMETRO2
 PARAMETRO2 -> epsilon | assign EXPR
-
-EXPR -> OPUN EXPR
+ EXPR -> OPUN EXPR
 EXPR -> opar EXPR cpar
 EXPR -> ATOM EXPR1
 EXPR1 -> OPBIN EXPR EXPR1
 EXPR1 -> epsilon
-
-OPUN -> minus | not
+ OPUN -> minus | not
 OPBIN -> OPMUL | OPSUM | OPREL | OPEQ | OPLOG | pow
 OPMUL -> mult | div|mod
 OPSUM -> plus | minus
 OPREL -> lteq | gteq | lt | gt
 OPEQ -> eq | neq
 OPLOG -> and | or
-
-ATOM -> int | float | true | false | string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
-
-OBJETO -> obrace OBJETO1 cbrace
+ ATOM -> int | float | true | false | string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
+ OBJETO -> obrace OBJETO1 cbrace
 OBJETO1 -> epsilon | KEYVALUE OBJETOA1
 OBJETOA1 -> epsilon | OBJETOA2 OBJETOA1
 OBJETOA2 -> comma KEYVALUE
-
-KEYVALUE -> id points EXPR
+ KEYVALUE -> id points EXP

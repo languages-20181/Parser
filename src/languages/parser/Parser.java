@@ -334,6 +334,7 @@ public class Parser {
      * Automatically builds LL(1) parsing table by using follow and first set
      */
     private void buildParsingTable() {
+        HashMap <String, ArrayList < Set <String> >> prediction = new HashMap<>();
         for (Rule r : rules) {
             Symbol[] rightSide = r.getRightSide();
             NonTerminal leftSide = r.getLeftSide();
@@ -343,12 +344,26 @@ public class Parser {
             //for (Terminal s : firstSetForRightSide) {
             //    parsingTable.put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
             //}
+            System.out.println("LEFTSIDE: "+ leftSide  );
+            for (int i = 0 ; i < rightSide.length ; i++){
+                System.out.print(" ------- "+rightSide[i].getName());
+            }
+            System.out.println("");
+
 
             if (firstSetForRightSide.contains(epsilon)) {
-                for (Terminal s : followSetForLeftSide) {
-                    parsingTable
-                            .put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
-                }
+                ArrayList<ArrayList<String>> arr = new ArrayList<>();
+
+
+              //prediction.put(leftSide,arr.add();
+         /*       Stem.out.println("LEFTSIDE: "+ leftSide  );
+                for (int i = 0 ; i < rightSide.length ; i++){
+                    System.out.println("holaa "+rightSide[i].getName());
+                }*/
+                //for (Terminal s : followSetForLeftSide) {
+                    //parsingTable
+                      //      .put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
+                //}
             }
         }
     }
