@@ -1,10 +1,10 @@
 PARSE -> 
-    FROM_INPUT | []
-    FROM_FILE
+    FROM_INPUT | [while, for, id, log, int, funcion, float, true, false, string, nil, from, import, other, retorno, if, obrace, okey]
+    FROM_FILE [while, for, id, log, newline, int, funcion, float, eof, true, false, string, nil, from, import, other, retorno, if, obrace, okey]
 FROM_INPUT -> 
-    STAT newline
+    STAT newline [while, for, id, log, int, funcion, float, true, false, string, nil, from, import, other, retorno, if, obrace, okey]
 FROM_FILE -> 
-    FROM_FILE2 eof
+    FROM_FILE2 eof [EPSILON, while, for, id, log, newline, int, funcion, float, true, false, string, nil, from, import, other, retorno, if, obrace, okey]
 FROM_FILE2 -> 
     epsilon | 
     FROM_FILE3 FROM_FILE2
@@ -68,46 +68,126 @@ IMPORTAR ->
 IMPORTAR1 -> 
     epsilon | 
     IMPORTAR2 IMPORTAR1
-IMPORTAR2 -> point id
-RETORNAR -> retorno opar EXPR cpar newline
-CONDITION_BLOCK -> EXPR CONDITION_BLOCK2 STAT_BLOCK
-CONDITION_BLOCK2 -> epsilon | newline
-STAT_BLOCK -> obrace STAT_BLOCK1 cbrace
-STAT_BLOCK -> STAT newline
-STAT_BLOCK1 -> epsilon | STAT_BLOCK2 STAT_BLOCK1
-STAT_BLOCK2 -> STAT | newline
-ARRAY -> okey ARRAY1 ckey
-ARRAY1 -> epsilon | EXPR ARRAY2
-ARRAY2 -> epsilon | ARRAY3 ARRAY2
-ARRAY3 -> comma EXPR
-ACCESSARRAY -> VARIABLE okey EXPR ckey
-VARIABLE -> id VARIABLE
-VAR -> VARIABLEA1 VARIABLEA2
-VARIABLEA2 -> epsilon | opar VARIABLEB1 cpar
-VARIABLEB1 -> epsilon | VARIABLEC1
-VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1VARIABLEC2 -> comma EXPR
-VARIABLEA1 -> epsilon | VARIABLEAB1 VARIABLEA1
-VARIABLEAB1 -> point id
-VAR -> VARIABLE1 okey EXPR ckey
-VARIABLE1 -> epsilon | VARIABLE2 VARIABLE1
-VARIABLE2 -> point id
-PARAMETRO -> id | PARAMETRO2
-PARAMETRO2 -> epsilon | assign EXPR
- EXPR -> OPUN EXPR
-EXPR -> opar EXPR cpar
-EXPR -> ATOM EXPR1
-EXPR1 -> OPBIN EXPR EXPR1
-EXPR1 -> epsilon
- OPUN -> minus | not
-OPBIN -> OPMUL | OPSUM | OPREL | OPEQ | OPLOG | pow
-OPMUL -> mult | div|mod
-OPSUM -> plus | minus
-OPREL -> lteq | gteq | lt | gt
-OPEQ -> eq | neq
-OPLOG -> and | or
- ATOM -> int | float | true | false | string | ARRAY | OBJETO | ACCESSARRAY | VARIABLE | nil
- OBJETO -> obrace OBJETO1 cbrace
-OBJETO1 -> epsilon | KEYVALUE OBJETOA1
-OBJETOA1 -> epsilon | OBJETOA2 OBJETOA1
-OBJETOA2 -> comma KEYVALUE
-KEYVALUE -> id points EXP
+IMPORTAR2 -> 
+    point id
+RETORNAR -> 
+    retorno opar EXPR cpar newline
+CONDITION_BLOCK -> 
+    EXPR CONDITION_BLOCK2 STAT_BLOCK
+CONDITION_BLOCK2 -> 
+    epsilon | 
+    newline
+STAT_BLOCK -> 
+    obrace STAT_BLOCK1 cbrace
+STAT_BLOCK -> 
+    STAT newline
+STAT_BLOCK1 -> 
+    epsilon | 
+    STAT_BLOCK2 STAT_BLOCK1
+STAT_BLOCK2 -> 
+    STAT | 
+    newline
+ARRAY -> 
+    okey ARRAY1 ckey
+ARRAY1 -> 
+    epsilon | 
+    EXPR ARRAY2
+ARRAY2 -> 
+    epsilon | 
+    ARRAY3 ARRAY2
+ARRAY3 -> 
+    comma EXPR
+ACCESSARRAY -> 
+    VARIABLE okey EXPR ckey
+VARIABLE -> 
+    id VARIABLE
+VAR -> 
+    VARIABLEA1 VARIABLEA2
+VARIABLEA2 -> 
+    epsilon | 
+    opar VARIABLEB1 cpar
+VARIABLEB1 -> 
+    epsilon | 
+    VARIABLEC1
+VARIABLEC1 -> 
+    epsilon | 
+    VARIABLEC2 VARIABLEC1
+VARIABLEC2 -> 
+    comma EXPR
+VARIABLEA1 -> 
+    epsilon | 
+    VARIABLEAB1 VARIABLEA1
+VARIABLEAB1 -> 
+    point id
+VAR -> 
+    VARIABLE1 okey EXPR ckey
+VARIABLE1 -> 
+    epsilon | 
+    VARIABLE2 VARIABLE1
+VARIABLE2 -> 
+    point id
+PARAMETRO -> 
+    id | 
+    PARAMETRO2
+PARAMETRO2 -> 
+    epsilon | 
+    assign EXPR
+EXPR -> 
+    OPUN EXPR |
+    opar EXPR cpar |
+    ATOM EXPR1
+EXPR1 -> 
+    OPBIN EXPR EXPR1
+EXPR1 -> 
+    epsilon
+OPUN -> 
+    minus | 
+    not
+OPBIN -> 
+    OPMUL | 
+    OPSUM | 
+    OPREL | 
+    OPEQ | 
+    OPLOG | 
+    pow
+OPMUL -> 
+    mult | 
+    div|
+    mod
+OPSUM -> 
+    plus | 
+    minus
+OPREL -> 
+    lteq | 
+    gteq | 
+    lt | 
+    gt
+OPEQ -> 
+    eq | 
+    neq
+OPLOG -> 
+    and | 
+    or
+ATOM -> 
+    int | 
+    float | 
+    true | 
+    false | 
+    string | 
+    ARRAY | 
+    OBJETO | 
+    ACCESSARRAY | 
+    VARIABLE | 
+    nil
+OBJETO -> 
+    obrace OBJETO1 cbrace
+OBJETO1 -> 
+    epsilon | 
+    KEYVALUE OBJETOA1
+OBJETOA1 -> 
+    epsilon | 
+    OBJETOA2 OBJETOA1
+OBJETOA2 -> 
+    comma KEYVALUE
+KEYVALUE -> 
+    id points EXP
