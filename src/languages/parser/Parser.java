@@ -353,6 +353,225 @@ public class Parser {
         }
     }
 
+    public void statBlock2Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(45));
+        HashSet<String> expected2 = prediction.get(rules.get(46));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            statRule();
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("newline");
+        }else 
+        {
+            error(expected1.toString()+ expected2.toString());
+        }
+    }
+    
+    public void arrayRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(47));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("okey");
+            array1Rule();
+            match("ckey");
+        } else 
+        {
+            error(expected1.toString());
+        }
+    }
+    
+    public void array1Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(49));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	exprRule();
+            array2Rule();
+        } 
+    }
+    
+    public void array2Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(51));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	array3Rule();
+            array2Rule();
+        } 
+    }
+    
+    public void array3Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(51));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("comma");
+        	exprRule();
+        } else 
+        {
+            error(expected1.toString());
+        }
+    }
+    
+    public void parametroRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(68));
+        HashSet<String> expected2 = prediction.get(rules.get(69));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("id");
+        } else if ( expected2.contains( getCurrentToken() ) )
+        {
+        	parametro2Rule();
+        } else 
+        {
+            error( 
+                expected1.toString() +
+                expected2.toString()
+                );
+        }
+    }
+
+    public void parametro2Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(71));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("assign");
+            exprRule();
+        } 
+    }
+
+    public void exprRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(72));
+        HashSet<String> expected2 = prediction.get(rules.get(73));
+        HashSet<String> expected3 = prediction.get(rules.get(74));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	opunRule();
+        	exprRule();
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("opar");
+            exprRule();
+            match("cpar");
+        } else if( expected3.contains( getCurrentToken() ) )
+        {
+            atom();
+            expr1Rule();
+        } else 
+        {
+            error( expected1.toString() + expected2.toString() + expected3.toString() );
+        }
+    }
+
+    public void expr1Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(75));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            opbinRule();
+            exprRule();
+            expr1Rule();
+        } 
+    }
+    
+    public void opunRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(77));
+        HashSet<String> expected2 = prediction.get(rules.get(78));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            match("minus");
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("not");
+        } else 
+        {
+            error( expected1.toString() + expected2.toString() );
+        }
+    }
+    
+    public void opbinRule ()
+    {
+
+        HashSet<String> expected1 = prediction.get(rules.get(79));
+        HashSet<String> expected2 = prediction.get(rules.get(80));
+        HashSet<String> expected3 = prediction.get(rules.get(81));
+        HashSet<String> expected4 = prediction.get(rules.get(82));
+        HashSet<String> expected5 = prediction.get(rules.get(83));
+        HashSet<String> expected6 = prediction.get(rules.get(84));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            opmulRule();
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            opsumRule();
+        } else if( expected3.contains( getCurrentToken() ) )
+        {
+            oprelRule();
+        }else if( expected4.contains( getCurrentToken() ) )
+        {
+            opeqRule();
+        }else if( expected5.contains( getCurrentToken() ) )
+        {
+            
+        }else if( expected6.contains( getCurrentToken() ) )
+        {
+            oplogRule();
+        }else 
+        {
+            error( 
+                expected1.toString() + 
+                expected2.toString() + 
+                expected3.toString() + 
+                expected4.toString() + 
+                expected5.toString() + 
+                expected6.toString());
+        }
+    }
+
+    public void opmulRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(85));
+        HashSet<String> expected2 = prediction.get(rules.get(86));
+        HashSet<String> expected3 = prediction.get(rules.get(87));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            match("mul");
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("div");
+        } else if( expected3.contains( getCurrentToken() ) )
+        {
+            match("mod");
+        } else 
+        {
+            error( expected1.toString() + expected2.toString() + expected3.toString() );
+        }
+    }
+
+    public void opsumRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(88));
+        HashSet<String> expected2 = prediction.get(rules.get(89));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            match("plus");
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("minus");
+        } else 
+        {
+            error( expected1.toString() + expected2.toString() );
+        }
+    }
+
+
     public void funcion4Rule(){
         if (getCurrentToken().equals("token_coma")){
             funcion6Rule();
@@ -362,7 +581,7 @@ public class Parser {
 
     public void funcion5Rule(){
         if( getCurrentToken().equals("token_newline")){
-            //continue
+            setCurrentToken(getToken());
         }else if(prediction.get(rules.get(39)).contains(getCurrentToken())){
             statRule();
         }else{
@@ -417,7 +636,7 @@ public class Parser {
     }
 
     public void statBlock1Rule(){
-        //epsilon | STAT_BLOCK2 STAT_BLOCK1
+
         if (prediction.get(rules.get(48)).contains(getCurrentToken())) {
             statBlock2Rule();
             statBlock1Rule();
@@ -426,6 +645,46 @@ public class Parser {
 
 
 
+    //OPREL -> lteq | gteq | lt | gt
+
+    public void oprelRule(){
+        String token = "lteq gteq lt gt";
+        if (token.contains(getCurrentToken())){
+            setCurrentToken(getToken());
+        } else{
+            error( token);
+        }
+    }
+
+    public void opeqRule(){
+        if (getCurrentToken().equals("eq") || getCurrentToken().equals("neq")){
+            setCurrentToken(getToken());
+        }else{
+            error("eq, neq");
+        }
+    }
+
+    public void oplogRule(){
+        if (getCurrentToken().equals("and") || getCurrentToken().equals("or")){
+            setCurrentToken(getToken());
+        } else{
+            error("and, or");
+        }
+    }
+
+
+    public void atomRule(){
+        String expectedTokens = "int nil string false true float";
+        if(expectedTokens.contains(getCurrentToken())){
+            setCurrentToken(getToken());
+        }else if (getCurrentToken().equals("id")){
+            variableRule();
+        }else if (getCurrentToken().equals("okey")){
+            arrayRule();
+        }else{
+            error(expectedTokens + " id" + " okey");
+        }
+    }
 
     public String getCurrentToken() {
 
