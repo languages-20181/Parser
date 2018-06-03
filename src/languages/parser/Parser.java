@@ -17,7 +17,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Parser {
-    public static final String END_OF_FILE = "fin archivo";
+    public static final String END_OF_FILE = "eof";
     /** Terminal symbol of grammar which represents empty string */
     public static Terminal epsilon = new Terminal(0, "EPSILON");
 
@@ -149,7 +149,6 @@ public class Parser {
         while (data.hasNext()) {
             String nextLine = data.nextLine();
             if (nextLine.length() == 0) continue;
-            System.out.println(nextLine);
             StringTokenizer t = new StringTokenizer(nextLine);
             String symbolName = t.nextToken();
             if (!nameToSymbol.containsKey(symbolName)) {
@@ -196,6 +195,7 @@ public class Parser {
         Set<Rule> set = new HashSet<Rule>();
         for (Rule r : rules) {
             if (r.getLeftSide().equals(nonTerminalSymbol))
+                //System.out.println(r);
                 set.add(r);
         }
         return set;
