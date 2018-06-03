@@ -1,3 +1,2 @@
-funcion suma (x,y)
- returno (x+y)
-end
+arreglo=["hola","mundo","date",2.0,"jun",2017]
+log(arreglo)

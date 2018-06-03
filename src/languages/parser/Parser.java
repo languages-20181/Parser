@@ -178,6 +178,94 @@ public class Parser {
 
     }
 
+    public void statBlock2Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(45));
+        HashSet<String> expected2 = prediction.get(rules.get(46));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+            statRule();
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("newline");
+        }else 
+        {
+            error(expected1.toString()+ expected2.toString());
+        }
+    }
+    
+    public void arrayRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(47));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("okey");
+            array1Rule();
+            match("ckey");
+        } else 
+        {
+            error(expected1.toString());
+        }
+    }
+    
+    public void array1Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(49));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	exprRule();
+            array2Rule();
+        } 
+    }
+    
+    public void array2Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(51));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	array3Rule();
+            array2Rule();
+        } 
+    }
+    
+    public void array3Rule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(51));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	match("comma");
+        	exprRule();
+        } else 
+        {
+            error(expected1.toString());
+        }
+    }
+    
+    public void exprRule ()
+    {
+        HashSet<String> expected1 = prediction.get(rules.get(72));
+        HashSet<String> expected2 = prediction.get(rules.get(73));
+        HashSet<String> expected3 = prediction.get(rules.get(74));
+        if ( expected1.contains( getCurrentToken() ) )
+        {
+        	opunRule();
+        	exprRule();
+        } else if( expected2.contains( getCurrentToken() ) )
+        {
+            match("opar");
+            exprRule();
+            match("cpar");
+        } else if( expected3.contains( getCurrentToken() ) )
+        {
+            atom();
+            expr1Rule();
+        } else 
+        {
+            error( expected1.toString() + expected2.toString() + expected3.toString() );
+        }
+    }
+    
+    
 
 
 
