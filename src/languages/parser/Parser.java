@@ -24,6 +24,7 @@ public class Parser {
     /** Terminal symbol which represents end of program */
     public static Terminal endOfProgram = new Terminal(-1, "ENDOFPROGRAM");
 
+    public HashMap <Rule, HashSet < String> > prediction;
     /** Start symbol of the grammar */
     private NonTerminal startSymbol;
 
@@ -51,6 +52,7 @@ public class Parser {
     /** Sequence of applied rules during the derivations */
     private List<Rule> sequenceOfAppliedRules;
 
+
     private String currentToken;
     private ArrayList<Token> tokens;
     private int counter;
@@ -69,6 +71,7 @@ public class Parser {
         parsingTable = new HashMap<SimpleEntry<NonTerminal, Terminal>, Symbol[]>();
         sequenceOfAppliedRules = new ArrayList<Rule>();
         tokens = new ArrayList<Token>();
+        prediction = new HashMap<>();
     }
 
     //private static ArrayList<Token> tokens;
@@ -122,7 +125,8 @@ public class Parser {
 
     //Simbolo inicial de la gramatica
     public void parseRule (){
-        //TODO
+        HashSet <String> prueba = prediction.get(rules.get(2));
+        System.out.println("esta es el conjunto de pred" + prueba.toString());
     }
 
 
@@ -132,8 +136,8 @@ public class Parser {
 
             match("id");
             match("in");
-            exprRule();
-            statBlockRule();
+            //exprRule();
+            //statBlockRule();
         } else{
             error("for");
         }
@@ -142,7 +146,7 @@ public class Parser {
     public void logRule (){
         if (getCurrentToken().equals("log")){
             match("opar");
-            exprRule();
+            //exprRule();
             match("cpar");
         }else{
             error("log");
@@ -153,10 +157,10 @@ public class Parser {
         if(getCurrentToken().equals("funcion")){
             match("id");
             match("token_par_izq");
-            funcion2Rule();
+            //funcion2Rule();
             match("token_par_der");
 
-            funcion3Rule();
+            //funcion3Rule();
             match("end");
             match("funcion");
         }
@@ -166,11 +170,6 @@ public class Parser {
 
 
 
-
-    public String getToken(){
-        //TODO
-        return "";
-    }
 
     public String getCurrentToken() {
 
@@ -268,7 +267,6 @@ public class Parser {
         }
         return set;
     }
-
 
     private void calculateFirst() {
         for (Symbol s : alphabet) {
@@ -448,27 +446,23 @@ public class Parser {
      * Automatically builds LL(1) parsing table by using follow and first set
      */
     private void buildParsingTable() {
-        HashMap <Rule, HashSet < String> > prediction = new HashMap<>();
-        HashSet <String> prueba = prediction.get(rules.get(32));
-        System.out.println(prueba.toString());
+
+
         HashSet<String> arrayP = new HashSet<>();
+
         for (Rule r : rules) {
-            prediction.clear();
-            //System.out.println("ANTES"+prediction.get(r));
+            arrayP.clear();
+
             Symbol[] rightSide = r.getRightSide();
             NonTerminal leftSide = r.getLeftSide();
             Set<Terminal> firstSetForRightSide = first(rightSide);
             Set<Terminal> followSetForLeftSide = followSet.get(leftSide);
 
-            //for (Terminal s : firstSetForRightSide) {
-            //    parsingTable.put(new SimpleEntry<NonTerminal, Terminal>(leftSide, s), rightSide);
-            //}
+
             System.out.println("REGLA: "+ r.getRuleNumber()  );
 
             System.out.println("LEFTSIDE: "+ leftSide  );
-            //System.out.println("Primeros de la dereccha: " +firstSetForRightSide);
-            //System.out.println("FirstSetRigthSide: "+ firstSetForRightSide  );
-            //System.out.println("FollowSetLeftSide: "+ followSetForLeftSide  );
+
             for (int i = 0 ; i < rightSide.length ; i++){
                 System.out.print(" ------- "+rightSide[i].getName());
 
@@ -478,7 +472,7 @@ public class Parser {
 
             if (firstSetForRightSide.contains(epsilon))
             {
-                //System.out.println("Tiene epsilon");
+
                 for (Terminal first: firstSetForRightSide)
                     arrayP.add(first.getName());
 
@@ -488,16 +482,14 @@ public class Parser {
 
             } else
             {
-                //System.out.println("SIN epsilon");
+
                 for (Terminal first: firstSetForRightSide)
                     arrayP.add(first.getName());
 
             }
-
-            //System.out.println("ArrayTest: "+ arrayP );
-            prediction.put(r,arrayP);
+            prediction.put(r, (HashSet<String>) arrayP.clone());
             System.out.println("Prediction: "+ prediction.get(r) );
-            arrayP.clear();
+
         }
     }  
 }
