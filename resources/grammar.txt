@@ -19,7 +19,7 @@ FUNCION -> funcion id token_par_izq FUNCION2 token_par_der FUNCION3 end funcion
 FUNCION2 -> epsilon | PARAMETRO FUNCION4
 FUNCION3 -> epsilon | FUNCION5 FUNCION3
 FUNCION4 -> epsilon | FUNCION6 FUNCION4
-FUNCION5 -> token_newline|STAT
+FUNCION5 -> token_newline | STAT
 FUNCION6 -> token_coma PARAMETRO
 RETORNAR -> retorno opar EXPR cpar newline
 CONDITION_BLOCK -> EXPR CONDITION_BLOCK2 STAT_BLOCK

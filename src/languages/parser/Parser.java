@@ -136,8 +136,8 @@ public class Parser {
 
             match("id");
             match("in");
-            //exprRule();
-            //statBlockRule();
+            exprRule();
+            statBlockRule();
         } else{
             error("for");
         }
@@ -146,7 +146,7 @@ public class Parser {
     public void logRule (){
         if (getCurrentToken().equals("log")){
             match("opar");
-            //exprRule();
+            exprRule();
             match("cpar");
         }else{
             error("log");
@@ -160,17 +160,96 @@ public class Parser {
             funcion2Rule();
             match("token_par_der");
 
-           // funcion3Rule();
+            funcion3Rule();
             match("end");
             match("funcion");
         }
     }
 
     public void funcion2Rule(){
-
+        if (prediction.get(rules.get(33)).contains(getCurrentToken())){
+            parametroRule();
+            funcion4Rule();
+        }
     }
 
+    public void funcion3Rule(){
+        if (prediction.get(rules.get(35)).contains(getCurrentToken())){
+            funcion5Rule();
+            funcion3Rule();
+        }
+    }
 
+    public void funcion4Rule(){
+        if (getCurrentToken().equals("token_coma")){
+            funcion6Rule();
+            funcion4Rule();
+        }
+    }
+
+    public void funcion5Rule(){
+        if( getCurrentToken().equals("token_newline")){
+            //continue
+        }else if(prediction.get(rules.get(39)).contains(getCurrentToken())){
+            statRule();
+        }else{
+            error(prediction.get(rules.get(39)).toString() + " token_newline");
+        }
+    }
+
+    public void funcion6Rule(){
+        if(getCurrentToken().equals("token_coma")){
+            parametroRule();
+        }else{
+            error("token_coma");
+        }
+    }
+
+    public void retornarRule(){
+        if(getCurrentToken().equals("retorno")){
+            match("opar");
+            exprRule();
+            match("cpar");
+            match("newline");
+        }else{
+            error("retorno");
+        }
+    }
+
+    public void conditionBlockRule(){
+        if(prediction.get(rules.get(42)).contains(getCurrentToken())){
+            exprRule();
+            conditionBlock2Rule();
+            statBlockRule();
+        }else{
+            error(prediction.get(rules.get(42)).toString());
+        }
+    }
+    public void conditionBlock2Rule(){
+        if (getCurrentToken().equals("newline")){
+            setCurrentToken(getToken());
+        }
+    }
+
+    public void statBlockRule(){
+        if (getCurrentToken().equals("obrace")){
+            statBlock1Rule();
+            match("cbrace");
+        } else if(prediction.get(rules.get(46)).contains(getCurrentToken())){
+            statRule();
+            match("newline");
+        }else{
+            error(prediction.get(rules.get(46)).toString() + " obrace");
+        }
+    }
+
+    public void statBlock1Rule(){
+        //epsilon | STAT_BLOCK2 STAT_BLOCK1
+        if (prediction.get(rules.get(48)).contains(getCurrentToken())) {
+            statBlock2Rule();
+            statBlock1Rule();
+        }
+    }
 
 
 
@@ -189,6 +268,8 @@ public class Parser {
     public void error(String token){
 
         System.out.println("Error sintactico se esperaba: " + token );
+        System.exit(0);
+
     }
 
     public void match(String predictionToken){
