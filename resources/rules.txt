@@ -1,0 +1,26 @@
+aasigment
+variable ASSIG (assigment | exp)
+
+variable
+ID (POINT ID)* (OPAR(expr(COMMA expr)*)?  CPAR)?
+| ID (POINT ID)* OKEY expr CKEY
+
+ log:
+LOG OPAR expr CPAR
+
+IF condition_block (ELSE IF condition_block)* (ELSE stat_block)? 
+
+FOR ID IN expr stat_block
+
+WHILE expr stat_block
+
+stat_block
+OBRACE (stat|NEWLINE)*CBRACE
+|stat NEWLINE
+
+expresion OP_BINARIO expresion
+
+OP_UNARIO expresion 
+
+array
+OKEY (expr (COMMA expr)*)? CKEY

@@ -50,39 +50,39 @@ public class Lexer {
 
     public void iniciarOperadoresEspeciales()
     {
-        operadoresEspecialesDobles.put("||","OR");
-        operadoresEspecialesDobles.put("&&","AND");
-        operadoresEspecialesDobles.put("==","EQ");
-        operadoresEspecialesDobles.put("!=","NEQ");
+        operadoresEspecialesDobles.put("||","or");
+        operadoresEspecialesDobles.put("&&","and");
+        operadoresEspecialesDobles.put("==","eq");
+        operadoresEspecialesDobles.put("!=","neq");
 
-        operadoresEspeciales.put(">","GT");
-        operadoresEspeciales.put("<","LT");
+        operadoresEspeciales.put(">","gt");
+        operadoresEspeciales.put("<","lt");
 
-        operadoresEspecialesDobles.put(">=","GTEQ");
-        operadoresEspecialesDobles.put("<=","LTEQ");
+        operadoresEspecialesDobles.put(">=","gteq");
+        operadoresEspecialesDobles.put("<=","lteq");
 
-        operadoresEspeciales.put("+","PLUS");
-        operadoresEspeciales.put("-","MINUS");
-        operadoresEspeciales.put("*","MULT");
-        operadoresEspeciales.put("/","DIV");
-        operadoresEspeciales.put("%","MOD");
-        operadoresEspeciales.put("^","POW");
-        operadoresEspeciales.put("!","NOT");
+        operadoresEspeciales.put("+","plus");
+        operadoresEspeciales.put("-","minus");
+        operadoresEspeciales.put("*","mult");
+        operadoresEspeciales.put("/","div");
+        operadoresEspeciales.put("%","mod");
+        operadoresEspeciales.put("^","pow");
+        operadoresEspeciales.put("!","not");
 
-        operadoresEspeciales.put("=", "ASSIGN");
+        operadoresEspeciales.put("=", "assign");
 
-        operadoresEspeciales.put("{","OBRACE");
-        operadoresEspeciales.put("}","CBRACE");
+        operadoresEspeciales.put("{","obrace");
+        operadoresEspeciales.put("}","cbrace");
 //      operadoresEspeciales.put("#","token_com"); No se considera ṕrque se analiza en el Switch (seleccionarToken)
-        operadoresEspeciales.put("[","OKEY");
-        operadoresEspeciales.put("]","CKEY");
-        operadoresEspeciales.put("(","OPAR");
-        operadoresEspeciales.put(")","CPAR");
-        operadoresEspeciales.put(":", "POINTS");
-        operadoresEspeciales.put(",","COMMA");
+        operadoresEspeciales.put("[","okey");
+        operadoresEspeciales.put("]","ckey");
+        operadoresEspeciales.put("(","opar");
+        operadoresEspeciales.put(")","cpar");
+        operadoresEspeciales.put(":", "points");
+        operadoresEspeciales.put(",","comma");
 
 //      operadoresEspeciales.put(".","token_point"); No se considera porque se analiza en el Switch (seleccionarToken)
-        operadoresEspeciales.put(".","POINT");
+        operadoresEspeciales.put(".","point");
     }
 
     public void iniciarPalabaraReservada()
@@ -103,9 +103,6 @@ public class Lexer {
         palabraReservada.add("desde");
         palabraReservada.add("todo");
     }
-
-
-
 
     public String entrada (String archivoEntrada) throws FileNotFoundException, IOException{
 

@@ -1,0 +1,32 @@
+ASSIGMENT -> VARIABLE assign ASSIG1.
+ASSIG1 -> ASSIGMENT | EXPR
+VARIABLE -> id VAR1 (opar(EXPR VAR3 )?  CPAR)?
+VARIABLE -> id VAR1 OKEY expr CKEY
+VAR1 -> EPSILON | VAR2 VAR1
+VAR2 -> point id
+VAR3 -> EPSILON | VAR4 VAR3
+VAR4 -> comma EXP
+VAR5 -> 
+variable
+
+
+
+ log:
+LOG OPAR expr CPAR
+
+IF condition_block (ELSE IF condition_block)* (ELSE stat_block)? 
+
+FOR ID IN expr stat_block
+
+WHILE expr stat_block
+
+stat_block
+OBRACE (stat|NEWLINE)*CBRACE
+|stat NEWLINE
+
+expresion OP_BINARIO expresion
+
+OP_UNARIO expresion 
+
+array
+OKEY (expr (COMMA expr)*)? CKEY
