@@ -52,6 +52,8 @@ public class Parser {
     private List<Rule> sequenceOfAppliedRules;
 
     private String currentToken;
+    private ArrayList<Token> tokens;
+    private int counter;
 
     /*
      * Initializes a newly created {@code Parser} object
@@ -66,7 +68,7 @@ public class Parser {
         followSet = new HashMap<Symbol, Set<Terminal>>();
         parsingTable = new HashMap<SimpleEntry<NonTerminal, Terminal>, Symbol[]>();
         sequenceOfAppliedRules = new ArrayList<Rule>();
-        currentToken = getToken();
+        tokens = new ArrayList<Token>();
     }
 
     //private static ArrayList<Token> tokens;
@@ -89,9 +91,26 @@ public class Parser {
         calculateFollow();
         System.out.println("conjunto de siguientes calculado: "+ followSet);
         buildParsingTable();
+        
         //System.out.println("conjunto de prediccion calculado: "+ parsingTable);
         //input = convertTokensToStack(list);
         //performParsingAlgorithm();
+    }
+    
+    public void initSin(ArrayList<Token> array_tokens) 
+    {
+    	tokens = array_tokens;
+    	counter = 0;
+    	currentToken = getToken();
+    	System.out.println(currentToken);
+    }
+    
+    public String getToken()
+    {
+    	Token token;
+    	token = tokens.remove(counter);
+    	counter++;
+        return token.getType();
     }
 
 
@@ -480,6 +499,5 @@ public class Parser {
             System.out.println("Prediction: "+ prediction.get(r) );
             arrayP.clear();
         }
-    }
-
+    }  
 }

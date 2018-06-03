@@ -33,4 +33,9 @@ public class Token {
         string += "," + Integer.toString(line) + "," + Integer.toString(col) + ">";
         return string;
     }
+
+	public String getType() {
+		return type;
+	}
+    
 }
