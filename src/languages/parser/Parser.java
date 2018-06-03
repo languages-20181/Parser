@@ -169,11 +169,11 @@ public class Parser {
     }
 
     public void compoundStatRule(){
-        HashSet<String> expected = prediction.get(rules.get(7));
-        HashSet<String> expected2 = prediction.get(rules.get(8));
-        HashSet<String> expected3 = prediction.get(rules.get(9));
-        HashSet<String> expected4 = prediction.get(rules.get(10));
-        HashSet<String> expected5 = prediction.get(rules.get(11));
+        HashSet<String> expected = prediction.get(rules.get(6));
+        HashSet<String> expected2 = prediction.get(rules.get(7));
+        HashSet<String> expected3 = prediction.get(rules.get(8));
+        HashSet<String> expected4 = prediction.get(rules.get(9));
+        HashSet<String> expected5 = prediction.get(rules.get(10));
 
         if (expected.contains(getCurrentToken())) {
             ifStatRule();
@@ -186,7 +186,121 @@ public class Parser {
         } else if (expected5.contains(getCurrentToken())) {
             assignmentRule();
         } else {
+            error(
+                    expected.toString()+
+                    expected2.toString()+
+                    expected3.toString()+
+                    expected4.toString()+
+                    expected5.toString()
+            );
+        }
+    }
+
+    public void simpleStatRule(){
+        HashSet<String> expected = prediction.get(rules.get(11));
+        HashSet<String> expected2 = prediction.get(rules.get(12));
+        HashSet<String> expected3 = prediction.get(rules.get(13));
+        HashSet<String> expected4 = prediction.get(rules.get(14));
+        HashSet<String> expected5 = prediction.get(rules.get(15));
+
+        if (expected.contains(getCurrentToken())) {
+            assignmentRule();
+        } else if (expected2.contains(getCurrentToken())) {
+            logRule();
+        } else if (expected3.contains(getCurrentToken())) {
+            retornarRule();
+        } else if (expected4.contains(getCurrentToken())) {
+            atomRule();
+            match("newline");
+        } else if (expected5.contains(getCurrentToken())) {
+            otherRule();
+        } else {
+            error(expected.toString()+
+                    expected2.toString()+
+                    expected3.toString()+
+                    expected4.toString()+
+                    expected5.toString()
+            );
+        }
+    }
+
+    public void assignmentRule(){
+        HashSet<String> expected = prediction.get(rules.get(16));
+
+        if (expected.contains(getCurrentToken())) {
+            variableRule();
+            match("assign");
+            assignment2Rule();
+        } else {
+            error(expected.toString());
+        }
+    }
+
+    public void assignment2Rule(){
+        HashSet<String> expected = prediction.get(rules.get(17));
+        HashSet<String> expected2 = prediction.get(rules.get(18));
+
+        if (expected.contains(getCurrentToken())) {
+            assignmentRule();
+        } else if (expected2.contains(getCurrentToken())) {
+            exprRule();
+        } else {
             error(expected.toString()+expected2.toString());
+        }
+    }
+
+    public void ifStatRule(){
+        HashSet<String> expected = prediction.get(rules.get(19));
+
+        if (expected.contains(getCurrentToken())) {
+            match("if");
+            conditionBlockRule();
+            ifStat2Rule();
+            ifStat3Rule();
+        } else {
+            error(expected.toString());
+        }
+    }
+
+    public void ifStat2Rule(){
+        HashSet<String> expected = prediction.get(rules.get(21));
+
+        if (expected.contains(getCurrentToken())) {
+            ifStat4Rule();
+            ifStat2Rule();
+        }
+    }
+
+    public void ifStat3Rule(){
+        HashSet<String> expected = prediction.get(rules.get(23));
+
+        if (expected.contains(getCurrentToken())) {
+            match("else");
+            statBlockRule();
+        }
+    }
+
+    public void ifStat4Rule(){
+        HashSet<String> expected = prediction.get(rules.get(24));
+
+        if (expected.contains(getCurrentToken())) {
+            match("else");
+            match("if");
+            conditionBlockRule();
+        } else {
+            error(expected.toString());
+        }
+    }
+
+    public void whileStatRule(){
+        HashSet<String> expected = prediction.get(rules.get(25));
+
+        if (expected.contains(getCurrentToken())) {
+            match("while");
+            exprRule();
+            statBlockRule();
+        } else {
+            error(expected.toString());
         }
     }
 
