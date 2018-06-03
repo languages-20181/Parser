@@ -165,13 +165,17 @@ public class Parser {
         if(getCurrentToken().equals("funcion")){
             match("id");
             match("token_par_izq");
-            //funcion2Rule();
+            funcion2Rule();
             match("token_par_der");
 
-            //funcion3Rule();
+           // funcion3Rule();
             match("end");
             match("funcion");
         }
+    }
+
+    public void funcion2Rule(){
+
     }
 
 

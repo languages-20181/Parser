@@ -1,9 +1,10 @@
-<id,funcionsuma,1,1>
-<opar,1,2>
-<id,x,1,3>
-<comma,1,4>
-<id,y,1,5>
-<cpar,1,6>
+<funcion,1,1>
+<id,suma,1,2>
+<opar,1,3>
+<id,x,1,4>
+<comma,1,5>
+<id,y,1,6>
+<cpar,1,7>
 <id,returno,2,1>
 <opar,2,2>
 <id,x,2,3>
