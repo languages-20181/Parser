@@ -127,7 +127,7 @@ public class Parser {
             error(nextToken);
         }
     }
-    
+
     public void init(){
         parseRule();
         if (!getCurrentToken().equals(END_OF_FILE)){
