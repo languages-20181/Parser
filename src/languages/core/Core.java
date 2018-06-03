@@ -12,10 +12,6 @@ public class Core
         Parser parser = new Parser();
         File grammarFile = FileUtil.readGrammar("resources/grammar.txt");
         parser.parse(grammarFile);
-        //tokens = lexer.getTokens();
-        //for (Token x : tokens)
-        //{
-        //   System.out.println(x);
-        //}
+        parser.init();
     }
 }
