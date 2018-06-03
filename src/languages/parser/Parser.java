@@ -129,14 +129,65 @@ public class Parser {
         {
             fromFile2Rule();
             match("eof");
-        } else if(!expected.contains("epsilon"))
-        {
-            error(expected.toString());
         }
     }
 
     public void fromFile2Rule(){
-        ;
+
+        HashSet<String> expected = prediction.get(rules.get(2));
+
+        if (expected.contains(getCurrentToken())) {
+            fromFile3Rule();
+            fromFile2Rule();
+        }
+    }
+
+    public void fromFile3Rule(){
+        HashSet<String> expected = prediction.get(rules.get(3));
+        HashSet<String> expected2 = prediction.get(rules.get(4));
+
+        if (expected.contains(getCurrentToken())) {
+            statRule();
+        } else if (expected2.contains(getCurrentToken())) {
+            match("newline");
+        } else {
+            error(expected.toString()+expected2.toString());
+        }
+    }
+
+    public void statRule(){
+        HashSet<String> expected = prediction.get(rules.get(5));
+        HashSet<String> expected2 = prediction.get(rules.get(6));
+
+        if (expected.contains(getCurrentToken())) {
+            simpleStatRule();
+        } else if (expected2.contains(getCurrentToken())) {
+            compoundStatRule();
+        } else {
+            error(expected.toString()+expected2.toString());
+        }
+    }
+
+    public void compoundStatRule(){
+        HashSet<String> expected = prediction.get(rules.get(7));
+        HashSet<String> expected2 = prediction.get(rules.get(8));
+        HashSet<String> expected3 = prediction.get(rules.get(9));
+        HashSet<String> expected4 = prediction.get(rules.get(10));
+        HashSet<String> expected5 = prediction.get(rules.get(11));
+
+        if (expected.contains(getCurrentToken())) {
+            ifStatRule();
+        } else if (expected2.contains(getCurrentToken())) {
+            whileStatRule();
+        } else if (expected3.contains(getCurrentToken())) {
+            forStatRule();
+        } else if (expected4.contains(getCurrentToken())) {
+            funcionRule();
+        } else if (expected5.contains(getCurrentToken())) {
+            assignmentRule();
+        } else {
+            error(expected.toString()+expected2.toString());
+        }
     }
 
     public void forStatRule (){
