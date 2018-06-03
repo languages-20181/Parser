@@ -17,7 +17,7 @@ import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Parser {
-
+    public static final String END_OF_FILE = "fin archivo";
     /** Terminal symbol of grammar which represents empty string */
     public static Terminal epsilon = new Terminal(0, "EPSILON");
 
@@ -94,26 +94,44 @@ public class Parser {
         //performParsingAlgorithm();
     }
 
+    //Simbolo inicial de la gramatica
+    public void parseRule (){
+        //TODO
+    }
+
     public String getToken(){
         //TODO
         return "";
     }
 
     public String getCurrentToken() {
+
         return currentToken;
     }
 
     public void setCurrentToken(String currentToken){
+
         this.currentToken = currentToken;
     }
+
+
     public void error(String token){
-        System.out.println("Error sintactico se esperaba para el token: " + token );
+
+        System.out.println("Error sintactico se esperaba: " + token );
     }
+
     public void match(String nextToken){
         if (getCurrentToken().equals(nextToken)){
             setCurrentToken(getToken());
         }else{
             error(nextToken);
+        }
+    }
+    
+    public void init(){
+        parseRule();
+        if (!getCurrentToken().equals(END_OF_FILE)){
+            error(END_OF_FILE);
         }
     }
     /**
