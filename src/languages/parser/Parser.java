@@ -197,7 +197,7 @@ public class Parser {
 
     public void funcion5Rule(){
         if( getCurrentToken().equals("token_newline")){
-            //continue
+            setCurrentToken(getToken());
         }else if(prediction.get(rules.get(39)).contains(getCurrentToken())){
             statRule();
         }else{
@@ -252,7 +252,7 @@ public class Parser {
     }
 
     public void statBlock1Rule(){
-        //epsilon | STAT_BLOCK2 STAT_BLOCK1
+
         if (prediction.get(rules.get(48)).contains(getCurrentToken())) {
             statBlock2Rule();
             statBlock1Rule();
@@ -261,6 +261,46 @@ public class Parser {
 
 
 
+    //OPREL -> lteq | gteq | lt | gt
+
+    public void oprelRule(){
+        String token = "lteq gteq lt gt";
+        if (token.contains(getCurrentToken())){
+            setCurrentToken(getToken());
+        } else{
+            error( token);
+        }
+    }
+
+    public void opeqRule(){
+        if (getCurrentToken().equals("eq") || getCurrentToken().equals("neq")){
+            setCurrentToken(getToken());
+        }else{
+            error("eq, neq");
+        }
+    }
+
+    public void oplogRule(){
+        if (getCurrentToken().equals("and") || getCurrentToken().equals("or")){
+            setCurrentToken(getToken());
+        } else{
+            error("and, or");
+        }
+    }
+
+
+    public void atomRule(){
+        String expectedTokens = "int nil string false true float";
+        if(expectedTokens.contains(getCurrentToken())){
+            setCurrentToken(getToken());
+        }else if (getCurrentToken().equals("id")){
+            variableRule();
+        }else if (getCurrentToken().equals("okey")){
+            arrayRule();
+        }else{
+            error(expectedTokens + " id" + " okey");
+        }
+    }
 
     public String getCurrentToken() {
 
