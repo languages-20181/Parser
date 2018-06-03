@@ -177,12 +177,23 @@ public class Lexer {
 
     }
 
+    private static boolean saberSiHayPalabrasReservadas(String cadenaAEvaluar){
+        String cadena = cadenaAEvaluar;
+        String [] palabras = cadena.split(" ");
+        for (String palabra : palabras){
+            if (palabraReservada.contains(palabra)){
+                return true;
+            }
+        }
+        return false;
+
+    }
     private static int separarOperadorEspecial(String linea, int indiceInicial, int i, String caracterActual, int aumento) throws IOException {
 
         String cadenaAEvaluar = linea.substring(indiceInicial,i);
         aumentarColumna();
 
-        if(cadenaAEvaluar.contains(" ") && cadenaAEvaluar.contains("if") &&
+        if(cadenaAEvaluar.contains(" ") && saberSiHayPalabrasReservadas(cadenaAEvaluar) &&
                 !cadenaAEvaluar.startsWith("\"") && !cadenaAEvaluar.startsWith("#")){
             String []  spl= cadenaAEvaluar.split(" ");
 
