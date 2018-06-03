@@ -52,7 +52,6 @@ public class Parser {
     /** Sequence of applied rules during the derivations */
     private List<Rule> sequenceOfAppliedRules;
 
-
     private String currentToken;
     private ArrayList<Token> tokens;
     private int counter;
@@ -124,12 +123,21 @@ public class Parser {
 
 
     //Simbolo inicial de la gramatica
-    public void parseRule (){
-        HashSet <String> prueba = prediction.get(rules.get(2));
-        System.out.println("esta es el conjunto de pred" + prueba.toString());
+    public void fromFileRule (){
+        HashSet<String> expected = prediction.get(rules.get(0));
+        if (expected.contains(getCurrentToken()))
+        {
+            fromFile2Rule();
+            match("eof");
+        } else if(!expected.contains("epsilon"))
+        {
+            error(expected.toString());
+        }
     }
 
-
+    public void fromFile2Rule(){
+        ;
+    }
 
     public void forStatRule (){
         if (getCurrentToken().equals("for")){
@@ -281,7 +289,7 @@ public class Parser {
     }
 
     public void init(){
-        parseRule();
+        fromFileRule();
         if (!getCurrentToken().equals(END_OF_FILE)){
             error(END_OF_FILE);
         }
@@ -531,8 +539,6 @@ public class Parser {
      * Automatically builds LL(1) parsing table by using follow and first set
      */
     private void buildParsingTable() {
-
-
         HashSet<String> arrayP = new HashSet<>();
 
         for (Rule r : rules) {
