@@ -9,18 +9,15 @@ import java.util.AbstractMap.SimpleEntry;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Queue;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Parser {
-
+    public static final String END_OF_FILE = "eof";
     /** Terminal symbol of grammar which represents empty string */
     public static Terminal epsilon = new Terminal(0, "EPSILON");
 
@@ -116,21 +113,39 @@ public class Parser {
         return token.getType();
     }
 
+    //Simbolo inicial de la gramatica
+    public void parseRule (){
+        //TODO
+    }
+
     public String getCurrentToken() {
+
         return currentToken;
     }
 
     public void setCurrentToken(String currentToken){
+
         this.currentToken = currentToken;
     }
+
+
     public void error(String token){
-        System.out.println("Error sintactico se esperaba para el token: " + token );
+
+        System.out.println("Error sintactico se esperaba: " + token );
     }
+
     public void match(String nextToken){
         if (getCurrentToken().equals(nextToken)){
             setCurrentToken(getToken());
         }else{
             error(nextToken);
+        }
+    }
+
+    public void init(){
+        parseRule();
+        if (!getCurrentToken().equals(END_OF_FILE)){
+            error(END_OF_FILE);
         }
     }
     /**
@@ -148,7 +163,6 @@ public class Parser {
         while (data.hasNext()) {
             String nextLine = data.nextLine();
             if (nextLine.length() == 0) continue;
-            System.out.println(nextLine);
             StringTokenizer t = new StringTokenizer(nextLine);
             String symbolName = t.nextToken();
             if (!nameToSymbol.containsKey(symbolName)) {
@@ -195,6 +209,7 @@ public class Parser {
         Set<Rule> set = new HashSet<Rule>();
         for (Rule r : rules) {
             if (r.getLeftSide().equals(nonTerminalSymbol))
+                //System.out.println(r);
                 set.add(r);
         }
         return set;

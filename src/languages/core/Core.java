@@ -26,5 +26,6 @@ public class Core
         parser.parse(grammarFile);
         parser.initSin(tokens);
         //parser.getToken();
+        parser.init();
     }
 }
