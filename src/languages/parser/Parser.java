@@ -51,6 +51,8 @@ public class Parser {
     /** Sequence of applied rules during the derivations */
     private List<Rule> sequenceOfAppliedRules;
 
+    private String currentToken;
+
     /*
      * Initializes a newly created {@code Parser} object
     */
@@ -64,6 +66,7 @@ public class Parser {
         followSet = new HashMap<Symbol, Set<Terminal>>();
         parsingTable = new HashMap<SimpleEntry<NonTerminal, Terminal>, Symbol[]>();
         sequenceOfAppliedRules = new ArrayList<Rule>();
+        currentToken = getToken();
     }
 
     //private static ArrayList<Token> tokens;
@@ -91,7 +94,28 @@ public class Parser {
         //performParsingAlgorithm();
     }
 
+    public String getToken(){
+        //TODO
+        return "";
+    }
 
+    public String getCurrentToken() {
+        return currentToken;
+    }
+
+    public void setCurrentToken(String currentToken){
+        this.currentToken = currentToken;
+    }
+    public void error(String token){
+        System.out.println("Error sintactico se esperaba para el token: " + token );
+    }
+    public void match(String nextToken){
+        if (getCurrentToken().equals(nextToken)){
+            setCurrentToken(getToken());
+        }else{
+            error(nextToken);
+        }
+    }
     /**
      * Constructs grammar rules from file
      *
