@@ -94,10 +94,59 @@ public class Parser {
         //performParsingAlgorithm();
     }
 
+
+
+
+
+    //funciones de los no terminales
+
+
     //Simbolo inicial de la gramatica
     public void parseRule (){
         //TODO
     }
+
+
+
+    public void forStatRule (){
+        if (getCurrentToken().equals("for")){
+
+            match("id");
+            match("in");
+            exprRule();
+            statBlockRule();
+        } else{
+            error("for");
+        }
+    }
+
+    public void logRule (){
+        if (getCurrentToken().equals("log")){
+            match("opar");
+            exprRule();
+            match("cpar");
+        }else{
+            error("log");
+        }
+    }
+
+    public void funcionRule (){
+        if(getCurrentToken().equals("funcion")){
+            match("id");
+            match("token_par_izq");
+            funcion2Rule();
+            match("token_par_der");
+
+            funcion3Rule();
+            match("end");
+            match("funcion");
+        }
+    }
+
+
+
+
+
 
     public String getToken(){
         //TODO
@@ -120,11 +169,11 @@ public class Parser {
         System.out.println("Error sintactico se esperaba: " + token );
     }
 
-    public void match(String nextToken){
-        if (getCurrentToken().equals(nextToken)){
+    public void match(String predictionToken){
+        if (getCurrentToken().equals(predictionToken)){
             setCurrentToken(getToken());
         }else{
-            error(nextToken);
+            error(predictionToken);
         }
     }
 
@@ -381,6 +430,8 @@ public class Parser {
      */
     private void buildParsingTable() {
         HashMap <Rule, HashSet < String> > prediction = new HashMap<>();
+        HashSet <String> prueba = prediction.get(rules.get(32));
+        System.out.println(prueba.toString());
         HashSet<String> arrayP = new HashSet<>();
         for (Rule r : rules) {
             prediction.clear();
