@@ -35,7 +35,8 @@ VAR -> VARIABLEA1 VARIABLEA2
 VAR -> VARIABLE1 okey EXPR ckey
 VARIABLEA2 -> epsilon | opar VARIABLEB1 cpar
 VARIABLEB1 -> epsilon | VARIABLEC1
-VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1VARIABLEC2 -> comma EXPR
+VARIABLEC1 -> epsilon | VARIABLEC2 VARIABLEC1
+VARIABLEC2 -> comma EXPR
 VARIABLEA1 -> epsilon | VARIABLEAB1 VARIABLEA1
 VARIABLEAB1 -> point id
 VARIABLE1 -> epsilon | VARIABLE2 VARIABLE1
@@ -49,7 +50,7 @@ EXPR1 -> OPBIN EXPR EXPR1
 EXPR1 -> epsilon
  OPUN -> minus | not
 OPBIN -> OPMUL | OPSUM | OPREL | OPEQ | OPLOG | pow
-OPMUL -> mult | div|mod
+OPMUL -> mult | div | mod
 OPSUM -> plus | minus
 OPREL -> lteq | gteq | lt | gt
 OPEQ -> eq | neq

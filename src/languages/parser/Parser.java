@@ -213,7 +213,7 @@ public class Parser {
             atomRule();
             match("newline");
         } else if (expected5.contains(getCurrentToken())) {
-            otherRule();
+            match("other");
         } else {
             error(expected.toString()+
                     expected2.toString()+
@@ -415,7 +415,92 @@ public class Parser {
             error(expected1.toString());
         }
     }
-    
+
+
+    public void variableRule(){
+        if(getCurrentToken().equals("id")) {
+            variable1Rule();
+        }
+        else error("id");
+
+    }
+
+    public void variablea2Rule (){
+
+        if(getCurrentToken().equals("opar")) {
+            variableb1Rule();
+            match("cpar");
+        }
+
+    }
+
+
+    public void variableb1Rule(){
+        variablec1Rule();
+    }
+
+    public void variablec1Rule(){
+        variablec2Rule();
+        variablec1Rule();
+    }
+
+    public void variablec2Rule(){
+        if(getCurrentToken().equals("comma")){
+            //exprRule();
+        }
+
+        else error("comma");
+
+
+    }
+
+    public void variablea1Rule(){
+        variableab1Rule();
+        variablea1Rule();
+    }
+
+    public void variableab1Rule(){
+        if(getCurrentToken().equals("point"))
+            match("id");
+        else error("point");
+    }
+
+
+    public void  varRule(){
+
+        HashSet<String> expected = prediction.get(rules.get(54));
+        HashSet<String> expected2 = prediction.get(rules.get(55));
+        if (expected.contains(getCurrentToken()))
+        {
+            variablea1Rule();
+            variablea2Rule();
+        } else if(expected2.contains(getCurrentToken()))
+        {
+            variable1Rule();
+            if(getCurrentToken().equals("okey")) {
+                variable1Rule();
+                // exprRule();
+                match("ckey");
+            } else error("okey");
+        }
+    }
+
+
+    public void variable1Rule(){
+
+        variable2Rule();
+        variable1Rule();
+    }
+
+    public void variable2Rule (){
+        if(getCurrentToken().equals("point")) {
+            match("id");
+        }
+
+        else error("point");
+    }
+
+
     public void parametroRule ()
     {
         HashSet<String> expected1 = prediction.get(rules.get(68));
@@ -461,7 +546,7 @@ public class Parser {
             match("cpar");
         } else if( expected3.contains( getCurrentToken() ) )
         {
-            atom();
+            atomRule();
             expr1Rule();
         } else 
         {
