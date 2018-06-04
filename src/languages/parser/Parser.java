@@ -116,13 +116,6 @@ public class Parser {
         return token.getType();
     }
 
-
-
-
-
-    //funciones de los no terminales
-
-
     //Simbolo inicial de la gramatica
     public void fromFileRule (){
         HashSet<String> expected = prediction.get(rules.get(0));
@@ -130,6 +123,8 @@ public class Parser {
         {
             fromFile2Rule();
             match("eof");
+        } else {
+            error(expected.toString()+expected.toString());
         }
     }
 
@@ -170,11 +165,10 @@ public class Parser {
     }
 
     public void compoundStatRule(){
-        HashSet<String> expected = prediction.get(rules.get(6));
-        HashSet<String> expected2 = prediction.get(rules.get(7));
-        HashSet<String> expected3 = prediction.get(rules.get(8));
-        HashSet<String> expected4 = prediction.get(rules.get(9));
-        HashSet<String> expected5 = prediction.get(rules.get(10));
+        HashSet<String> expected = prediction.get(rules.get(7));
+        HashSet<String> expected2 = prediction.get(rules.get(8));
+        HashSet<String> expected3 = prediction.get(rules.get(9));
+        HashSet<String> expected4 = prediction.get(rules.get(10));
 
         if (expected.contains(getCurrentToken())) {
             ifStatRule();
@@ -184,15 +178,12 @@ public class Parser {
             forStatRule();
         } else if (expected4.contains(getCurrentToken())) {
             funcionRule();
-        } else if (expected5.contains(getCurrentToken())) {
-            assignmentRule();
         } else {
             error(
                     expected.toString()+
                     expected2.toString()+
                     expected3.toString()+
-                    expected4.toString()+
-                    expected5.toString()
+                    expected4.toString()
             );
         }
     }
@@ -422,6 +413,7 @@ public class Parser {
 
     public void variableRule(){
         if(getCurrentToken().equals("id")) {
+            match("id");
             variable1Rule();
         }
         else error("id");
@@ -431,6 +423,7 @@ public class Parser {
     public void variablea2Rule (){
 
         if(getCurrentToken().equals("opar")) {
+            match("opar");
             variableb1Rule();
             match("cpar");
         }
@@ -438,9 +431,7 @@ public class Parser {
     }
 
 
-    public void variableb1Rule(){
-        variablec1Rule();
-    }
+    public void variableb1Rule(){ variablec1Rule(); }
 
     public void variablec1Rule(){
         variablec2Rule();
@@ -449,7 +440,8 @@ public class Parser {
 
     public void variablec2Rule(){
         if(getCurrentToken().equals("comma")){
-            //exprRule();
+            match("comma");
+            exprRule();
         }
 
         else error("comma");
@@ -463,16 +455,18 @@ public class Parser {
     }
 
     public void variableab1Rule(){
-        if(getCurrentToken().equals("point"))
+        if(getCurrentToken().equals("point")) {
+            match("point");
             match("id");
+        }
         else error("point");
     }
 
 
     public void  varRule(){
 
-        HashSet<String> expected = prediction.get(rules.get(54));
-        HashSet<String> expected2 = prediction.get(rules.get(55));
+        HashSet<String> expected = prediction.get(rules.get(55));
+        HashSet<String> expected2 = prediction.get(rules.get(56));
         if (expected.contains(getCurrentToken()))
         {
             variablea1Rule();
@@ -481,6 +475,7 @@ public class Parser {
         {
             variable1Rule();
             if(getCurrentToken().equals("okey")) {
+                match("okey");
                 variable1Rule();
                 exprRule();
                 match("ckey");
@@ -497,6 +492,7 @@ public class Parser {
 
     public void variable2Rule (){
         if(getCurrentToken().equals("point")) {
+            match("point");
             match("id");
         }
 
@@ -680,7 +676,7 @@ public class Parser {
 
     public void funcion6Rule(){
         if(getCurrentToken().equals("token_coma")){
-            match("token_coma")
+            match("token_coma");
             parametroRule();
         }else{
             error("token_coma");
