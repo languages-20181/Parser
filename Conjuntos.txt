@@ -129,7 +129,7 @@ Prediction: [epsilon]
 REGLA: 32
 LEFTSIDE: FUNCION3
  ------- FUNCION5 ------- FUNCION3
-Prediction: [token_newline|STAT]
+Prediction: [other, string, okey, log, false, for, float, while, int, nil, retorno, true, id, funcion, token_newline, if]
 REGLA: 33
 LEFTSIDE: FUNCION4
  ------- epsilon
@@ -140,282 +140,293 @@ LEFTSIDE: FUNCION4
 Prediction: [token_coma]
 REGLA: 35
 LEFTSIDE: FUNCION5
- ------- token_newline|STAT
-Prediction: [token_newline|STAT]
+ ------- token_newline
+Prediction: [token_newline]
 REGLA: 36
+LEFTSIDE: FUNCION5
+ ------- STAT
+Prediction: [other, string, okey, log, false, for, float, while, int, nil, retorno, true, id, funcion, if]
+REGLA: 37
 LEFTSIDE: FUNCION6
  ------- token_coma ------- PARAMETRO
 Prediction: [token_coma]
-REGLA: 37
+REGLA: 38
 LEFTSIDE: RETORNAR
  ------- retorno ------- opar ------- EXPR ------- cpar ------- newline
 Prediction: [retorno]
-REGLA: 38
+REGLA: 39
 LEFTSIDE: CONDITION_BLOCK
  ------- EXPR ------- CONDITION_BLOCK2 ------- STAT_BLOCK
 Prediction: [nil, minus, not, string, okey, opar, false, true, id, float, int]
-REGLA: 39
+REGLA: 40
 LEFTSIDE: CONDITION_BLOCK2
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 40
+REGLA: 41
 LEFTSIDE: CONDITION_BLOCK2
  ------- newline
 Prediction: [newline]
-REGLA: 41
+REGLA: 42
 LEFTSIDE: STAT_BLOCK
  ------- obrace ------- STAT_BLOCK1 ------- cbrace
 Prediction: [obrace]
-REGLA: 42
+REGLA: 43
 LEFTSIDE: STAT_BLOCK
  ------- STAT ------- newline
 Prediction: [other, string, okey, log, false, for, float, while, int, nil, retorno, true, id, funcion, if]
-REGLA: 43
+REGLA: 44
 LEFTSIDE: STAT_BLOCK1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 44
+REGLA: 45
 LEFTSIDE: STAT_BLOCK1
  ------- STAT_BLOCK2 ------- STAT_BLOCK1
 Prediction: [other, string, okey, log, false, for, float, while, int, nil, newline, retorno, true, id, funcion, if]
-REGLA: 45
+REGLA: 46
 LEFTSIDE: STAT_BLOCK2
  ------- STAT
 Prediction: [other, string, okey, log, false, for, float, while, int, nil, retorno, true, id, funcion, if]
-REGLA: 46
+REGLA: 47
 LEFTSIDE: STAT_BLOCK2
  ------- newline
 Prediction: [newline]
-REGLA: 47
+REGLA: 48
 LEFTSIDE: ARRAY
  ------- okey ------- ARRAY1 ------- ckey
 Prediction: [okey]
-REGLA: 48
+REGLA: 49
 LEFTSIDE: ARRAY1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 49
+REGLA: 50
 LEFTSIDE: ARRAY1
  ------- EXPR ------- ARRAY2
 Prediction: [nil, minus, not, string, okey, opar, false, true, id, float, int]
-REGLA: 50
+REGLA: 51
 LEFTSIDE: ARRAY2
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 51
+REGLA: 52
 LEFTSIDE: ARRAY2
  ------- ARRAY3 ------- ARRAY2
 Prediction: [comma]
-REGLA: 52
+REGLA: 53
 LEFTSIDE: ARRAY3
  ------- comma ------- EXPR
 Prediction: [comma]
-REGLA: 53
+REGLA: 54
 LEFTSIDE: VARIABLE
  ------- id ------- VARIABLE
 Prediction: [id]
-REGLA: 54
+REGLA: 55
 LEFTSIDE: VAR
  ------- VARIABLEA1 ------- VARIABLEA2
 Prediction: [epsilon, point]
-REGLA: 55
+REGLA: 56
 LEFTSIDE: VAR
  ------- VARIABLE1 ------- okey ------- EXPR ------- ckey
 Prediction: [epsilon, point]
-REGLA: 56
+REGLA: 57
 LEFTSIDE: VARIABLEA2
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 57
+REGLA: 58
 LEFTSIDE: VARIABLEA2
  ------- opar ------- VARIABLEB1 ------- cpar
 Prediction: [opar]
-REGLA: 58
-LEFTSIDE: VARIABLEB1
- ------- epsilon
-Prediction: [epsilon]
 REGLA: 59
 LEFTSIDE: VARIABLEB1
- ------- VARIABLEC1
+ ------- epsilon
 Prediction: [epsilon]
 REGLA: 60
+LEFTSIDE: VARIABLEB1
+ ------- VARIABLEC1
+Prediction: [epsilon, comma]
+REGLA: 61
 LEFTSIDE: VARIABLEC1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 61
-LEFTSIDE: VARIABLEC1
- ------- VARIABLEC2 ------- VARIABLEC1VARIABLEC2 ------- -> ------- comma ------- EXPR
-Prediction: []
 REGLA: 62
+LEFTSIDE: VARIABLEC1
+ ------- VARIABLEC2 ------- VARIABLEC1
+Prediction: [comma]
+REGLA: 63
+LEFTSIDE: VARIABLEC2
+ ------- comma ------- EXPR
+Prediction: [comma]
+REGLA: 64
 LEFTSIDE: VARIABLEA1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 63
+REGLA: 65
 LEFTSIDE: VARIABLEA1
  ------- VARIABLEAB1 ------- VARIABLEA1
 Prediction: [point]
-REGLA: 64
+REGLA: 66
 LEFTSIDE: VARIABLEAB1
  ------- point ------- id
 Prediction: [point]
-REGLA: 65
+REGLA: 67
 LEFTSIDE: VARIABLE1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 66
+REGLA: 68
 LEFTSIDE: VARIABLE1
  ------- VARIABLE2 ------- VARIABLE1
 Prediction: [point]
-REGLA: 67
+REGLA: 69
 LEFTSIDE: VARIABLE2
  ------- point ------- id
 Prediction: [point]
-REGLA: 68
+REGLA: 70
 LEFTSIDE: PARAMETRO
  ------- id
 Prediction: [id]
-REGLA: 69
+REGLA: 71
 LEFTSIDE: PARAMETRO
  ------- PARAMETRO2
 Prediction: [epsilon, assign]
-REGLA: 70
+REGLA: 72
 LEFTSIDE: PARAMETRO2
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 71
+REGLA: 73
 LEFTSIDE: PARAMETRO2
  ------- assign ------- EXPR
 Prediction: [assign]
-REGLA: 72
+REGLA: 74
 LEFTSIDE: EXPR
  ------- OPUN ------- EXPR
 Prediction: [minus, not]
-REGLA: 73
+REGLA: 75
 LEFTSIDE: EXPR
  ------- opar ------- EXPR ------- cpar
 Prediction: [opar]
-REGLA: 74
+REGLA: 76
 LEFTSIDE: EXPR
  ------- ATOM ------- EXPR1
 Prediction: [nil, string, okey, false, true, id, float, int]
-REGLA: 75
+REGLA: 77
 LEFTSIDE: EXPR1
  ------- OPBIN ------- EXPR ------- EXPR1
-Prediction: [minus, or, mult, div|mod, lteq, lt, gteq, eq, gt, plus, and, pow, neq]
-REGLA: 76
+Prediction: [minus, mult, mod, or, lteq, lt, gteq, eq, gt, plus, div, and, pow, neq]
+REGLA: 78
 LEFTSIDE: EXPR1
  ------- epsilon
 Prediction: [epsilon]
-REGLA: 77
+REGLA: 79
 LEFTSIDE: OPUN
  ------- minus
 Prediction: [minus]
-REGLA: 78
+REGLA: 80
 LEFTSIDE: OPUN
  ------- not
 Prediction: [not]
-REGLA: 79
+REGLA: 81
 LEFTSIDE: OPBIN
  ------- OPMUL
-Prediction: [mult, div|mod]
-REGLA: 80
+Prediction: [div, mult, mod]
+REGLA: 82
 LEFTSIDE: OPBIN
  ------- OPSUM
 Prediction: [minus, plus]
-REGLA: 81
+REGLA: 83
 LEFTSIDE: OPBIN
  ------- OPREL
 Prediction: [lt, gteq, gt, lteq]
-REGLA: 82
+REGLA: 84
 LEFTSIDE: OPBIN
  ------- OPEQ
 Prediction: [eq, neq]
-REGLA: 83
+REGLA: 85
 LEFTSIDE: OPBIN
  ------- OPLOG
 Prediction: [and, or]
-REGLA: 84
+REGLA: 86
 LEFTSIDE: OPBIN
  ------- pow
 Prediction: [pow]
-REGLA: 85
+REGLA: 87
 LEFTSIDE: OPMUL
  ------- mult
 Prediction: [mult]
-REGLA: 86
+REGLA: 88
 LEFTSIDE: OPMUL
- ------- div|mod
-Prediction: [div|mod]
-REGLA: 87
+ ------- div
+Prediction: [div]
+REGLA: 89
+LEFTSIDE: OPMUL
+ ------- mod
+Prediction: [mod]
+REGLA: 90
 LEFTSIDE: OPSUM
  ------- plus
 Prediction: [plus]
-REGLA: 88
+REGLA: 91
 LEFTSIDE: OPSUM
  ------- minus
 Prediction: [minus]
-REGLA: 89
+REGLA: 92
 LEFTSIDE: OPREL
  ------- lteq
 Prediction: [lteq]
-REGLA: 90
+REGLA: 93
 LEFTSIDE: OPREL
  ------- gteq
 Prediction: [gteq]
-REGLA: 91
+REGLA: 94
 LEFTSIDE: OPREL
  ------- lt
 Prediction: [lt]
-REGLA: 92
+REGLA: 95
 LEFTSIDE: OPREL
  ------- gt
 Prediction: [gt]
-REGLA: 93
+REGLA: 96
 LEFTSIDE: OPEQ
  ------- eq
 Prediction: [eq]
-REGLA: 94
+REGLA: 97
 LEFTSIDE: OPEQ
  ------- neq
 Prediction: [neq]
-REGLA: 95
+REGLA: 98
 LEFTSIDE: OPLOG
  ------- and
 Prediction: [and]
-REGLA: 96
+REGLA: 99
 LEFTSIDE: OPLOG
  ------- or
 Prediction: [or]
-REGLA: 97
+REGLA: 100
 LEFTSIDE: ATOM
  ------- int
 Prediction: [int]
-REGLA: 98
+REGLA: 101
 LEFTSIDE: ATOM
  ------- float
 Prediction: [float]
-REGLA: 99
+REGLA: 102
 LEFTSIDE: ATOM
  ------- true
 Prediction: [true]
-REGLA: 100
+REGLA: 103
 LEFTSIDE: ATOM
  ------- false
 Prediction: [false]
-REGLA: 101
+REGLA: 104
 LEFTSIDE: ATOM
  ------- string
 Prediction: [string]
-REGLA: 102
+REGLA: 105
 LEFTSIDE: ATOM
  ------- ARRAY
 Prediction: [okey]
-REGLA: 103
+REGLA: 106
 LEFTSIDE: ATOM
  ------- VARIABLE
 Prediction: [id]
-REGLA: 104
+REGLA: 107
 LEFTSIDE: ATOM
  ------- nil
 Prediction: [nil]
-funcion

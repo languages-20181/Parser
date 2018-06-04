@@ -355,8 +355,8 @@ public class Parser {
 
     public void statBlock2Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(45));
-        HashSet<String> expected2 = prediction.get(rules.get(46));
+        HashSet<String> expected1 = prediction.get(rules.get(46));
+        HashSet<String> expected2 = prediction.get(rules.get(47));
         if ( expected1.contains( getCurrentToken() ) )
         {
             statRule();
@@ -371,7 +371,7 @@ public class Parser {
     
     public void arrayRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(47));
+        HashSet<String> expected1 = prediction.get(rules.get(48));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	match("okey");
@@ -385,7 +385,7 @@ public class Parser {
     
     public void array1Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(49));
+        HashSet<String> expected1 = prediction.get(rules.get(50));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	exprRule();
@@ -395,7 +395,7 @@ public class Parser {
     
     public void array2Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(51));
+        HashSet<String> expected1 = prediction.get(rules.get(52));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	array3Rule();
@@ -405,7 +405,7 @@ public class Parser {
     
     public void array3Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(51));
+        HashSet<String> expected1 = prediction.get(rules.get(53));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	match("comma");
@@ -503,8 +503,8 @@ public class Parser {
 
     public void parametroRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(68));
-        HashSet<String> expected2 = prediction.get(rules.get(69));
+        HashSet<String> expected1 = prediction.get(rules.get(70));
+        HashSet<String> expected2 = prediction.get(rules.get(71));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	match("id");
@@ -522,7 +522,7 @@ public class Parser {
 
     public void parametro2Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(71));
+        HashSet<String> expected1 = prediction.get(rules.get(73));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	match("assign");
@@ -532,9 +532,9 @@ public class Parser {
 
     public void exprRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(72));
-        HashSet<String> expected2 = prediction.get(rules.get(73));
-        HashSet<String> expected3 = prediction.get(rules.get(74));
+        HashSet<String> expected1 = prediction.get(rules.get(74));
+        HashSet<String> expected2 = prediction.get(rules.get(75));
+        HashSet<String> expected3 = prediction.get(rules.get(76));
         if ( expected1.contains( getCurrentToken() ) )
         {
         	opunRule();
@@ -556,7 +556,7 @@ public class Parser {
 
     public void expr1Rule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(75));
+        HashSet<String> expected1 = prediction.get(rules.get(77));
         if ( expected1.contains( getCurrentToken() ) )
         {
             opbinRule();
@@ -567,8 +567,8 @@ public class Parser {
     
     public void opunRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(77));
-        HashSet<String> expected2 = prediction.get(rules.get(78));
+        HashSet<String> expected1 = prediction.get(rules.get(79));
+        HashSet<String> expected2 = prediction.get(rules.get(80));
         if ( expected1.contains( getCurrentToken() ) )
         {
             match("minus");
@@ -584,12 +584,12 @@ public class Parser {
     public void opbinRule ()
     {
 
-        HashSet<String> expected1 = prediction.get(rules.get(79));
-        HashSet<String> expected2 = prediction.get(rules.get(80));
-        HashSet<String> expected3 = prediction.get(rules.get(81));
-        HashSet<String> expected4 = prediction.get(rules.get(82));
-        HashSet<String> expected5 = prediction.get(rules.get(83));
-        HashSet<String> expected6 = prediction.get(rules.get(84));
+        HashSet<String> expected1 = prediction.get(rules.get(81));
+        HashSet<String> expected2 = prediction.get(rules.get(82));
+        HashSet<String> expected3 = prediction.get(rules.get(83));
+        HashSet<String> expected4 = prediction.get(rules.get(84));
+        HashSet<String> expected5 = prediction.get(rules.get(85));
+        HashSet<String> expected6 = prediction.get(rules.get(86));
         if ( expected1.contains( getCurrentToken() ) )
         {
             opmulRule();
@@ -604,10 +604,10 @@ public class Parser {
             opeqRule();
         }else if( expected5.contains( getCurrentToken() ) )
         {
-            
+            oplogRule();
         }else if( expected6.contains( getCurrentToken() ) )
         {
-            oplogRule();
+            match("pow");
         }else 
         {
             error( 
@@ -622,9 +622,9 @@ public class Parser {
 
     public void opmulRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(85));
-        HashSet<String> expected2 = prediction.get(rules.get(86));
-        HashSet<String> expected3 = prediction.get(rules.get(87));
+        HashSet<String> expected1 = prediction.get(rules.get(87));
+        HashSet<String> expected2 = prediction.get(rules.get(88));
+        HashSet<String> expected3 = prediction.get(rules.get(89));
         if ( expected1.contains( getCurrentToken() ) )
         {
             match("mul");
@@ -642,8 +642,8 @@ public class Parser {
 
     public void opsumRule ()
     {
-        HashSet<String> expected1 = prediction.get(rules.get(88));
-        HashSet<String> expected2 = prediction.get(rules.get(89));
+        HashSet<String> expected1 = prediction.get(rules.get(90));
+        HashSet<String> expected2 = prediction.get(rules.get(91));
         if ( expected1.contains( getCurrentToken() ) )
         {
             match("plus");
