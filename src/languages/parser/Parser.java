@@ -115,13 +115,6 @@ public class Parser {
         return token.getType();
     }
 
-
-
-
-
-    //funciones de los no terminales
-
-
     //Simbolo inicial de la gramatica
     public void fromFileRule (){
         HashSet<String> expected = prediction.get(rules.get(0));
@@ -129,6 +122,8 @@ public class Parser {
         {
             fromFile2Rule();
             match("eof");
+        } else {
+            error(expected.toString()+expected.toString());
         }
     }
 
@@ -169,11 +164,10 @@ public class Parser {
     }
 
     public void compoundStatRule(){
-        HashSet<String> expected = prediction.get(rules.get(6));
-        HashSet<String> expected2 = prediction.get(rules.get(7));
-        HashSet<String> expected3 = prediction.get(rules.get(8));
-        HashSet<String> expected4 = prediction.get(rules.get(9));
-        HashSet<String> expected5 = prediction.get(rules.get(10));
+        HashSet<String> expected = prediction.get(rules.get(7));
+        HashSet<String> expected2 = prediction.get(rules.get(8));
+        HashSet<String> expected3 = prediction.get(rules.get(9));
+        HashSet<String> expected4 = prediction.get(rules.get(10));
 
         if (expected.contains(getCurrentToken())) {
             ifStatRule();
@@ -183,15 +177,12 @@ public class Parser {
             forStatRule();
         } else if (expected4.contains(getCurrentToken())) {
             funcionRule();
-        } else if (expected5.contains(getCurrentToken())) {
-            assignmentRule();
         } else {
             error(
                     expected.toString()+
                     expected2.toString()+
                     expected3.toString()+
-                    expected4.toString()+
-                    expected5.toString()
+                    expected4.toString()
             );
         }
     }
