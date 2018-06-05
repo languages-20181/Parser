@@ -823,7 +823,6 @@ public class Parser {
             match( getCurrentToken().getType() );
         }else if ( getCurrentToken().getType().equals("okey") )
         {
-            match("okey");
             arrayRule();
         }else{
             error(getCurrentToken(), expectedTokens + " id" + " okey");
