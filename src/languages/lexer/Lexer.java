@@ -112,13 +112,13 @@ public class Lexer {
         String lineaActual = lector.readLine();
 
         while (lineaActual != null) {
-
             aumentarFila();
             cambiarColumna(0);
             manejadorTexto(lineaActual);
             lineaActual = lector.readLine();
-
         }
+
+        tokens.add(new Token("EOF",++fila,0));
 
         writer.close();
         return "Successful!!";

@@ -819,6 +819,7 @@ public class Parser {
         String expectedTokens = "int nil string false true float id epsilon";
         if( expectedTokens.contains( getCurrentToken().getType() ) )
         {
+            System.out.println(getCurrentToken().getType());
             match( getCurrentToken().getType() );
         }else if ( getCurrentToken().getType().equals("okey") )
         {

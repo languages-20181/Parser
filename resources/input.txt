@@ -1,2 +1,2 @@
 c=2
-log(sqrt(c))
+d=3
