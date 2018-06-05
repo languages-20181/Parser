@@ -1,3 +1,2 @@
-funcion suma (x,y)
- returno (x+y)
-end
+c=2
+log(sqrt(c))

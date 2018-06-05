@@ -1,1 +1,6 @@
+WHILE a < 5 {
+log(a)
+a=a+1
+}
+c=2
 log(sqrt(c))

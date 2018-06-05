@@ -424,7 +424,13 @@ public class Parser {
             variable1Rule();
         }
         else error(getCurrentToken(),"id");
+    }
 
+    public void variable1Rule(){
+        if(getCurrentToken().equals("point")) {
+            variable2Rule();
+            variable1Rule();
+        }
     }
 
     public void variablea2Rule ()
@@ -493,12 +499,6 @@ public class Parser {
                 match("ckey");
             } else error(getCurrentToken(),"okey");
         }
-    }
-
-    public void variable1Rule()
-    {
-        variable2Rule();
-        variable1Rule();
     }
 
     public void variable2Rule ()

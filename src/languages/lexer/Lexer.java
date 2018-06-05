@@ -317,15 +317,15 @@ public class Lexer {
         String identificador = esIdentificador(token);
 
         if (esCadena(token)) {
-            imprimirSalida("string,"+token);
+            imprimirSalida("string");
             String[] newToken = manejarDeteccion(substring[1]);
             if (newToken != null) return newToken;
         } else if (esDecimal(token)) {
-            imprimirSalida("float,"+token);
+            imprimirSalida("float");
             String[] newToken = manejarDeteccion(substring[1]);
             if (newToken != null) return newToken;
         } else if(esEntero(token)){
-            imprimirSalida("int,"+token);
+            imprimirSalida("int");
             String[] newToken = manejarDeteccion(substring[1]);
             if (newToken != null) return newToken;
         } else if (esComentario(token)) {
