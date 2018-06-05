@@ -5,7 +5,7 @@
 <comma,1,5>
 <id,y,1,6>
 <cpar,1,7>
-<id,returno,2,1>
+<retorno,2,1>
 <opar,2,2>
 <id,x,2,3>
 <plus,2,4>

@@ -12,6 +12,9 @@ import java.util.ArrayList;
 public class Core
 {
     public static void main(String args[]) throws IOException {
+    	Parser parser = new Parser();
+        File grammarFile = FileUtil.readGrammar("resources/grammar.txt");
+        parser.parse(grammarFile);
     	ArrayList<Token> tokens = new ArrayList<Token>();
         Lexer lexer = new Lexer("input.txt");
         tokens = lexer.getTokens();
@@ -21,9 +24,7 @@ public class Core
         {
            System.out.println(x);
         }
-        Parser parser = new Parser();
-        File grammarFile = FileUtil.readGrammar("resources/grammar.txt");
-        parser.parse(grammarFile);
+        
         parser.initSin(tokens);
         //parser.getToken();
         parser.init();

@@ -110,8 +110,11 @@ public class Parser {
     
     public String getToken()
     {
+    	System.out.println( "counter: " + counter );
     	Token token;
-    	token = tokens.remove(counter);
+    	
+    	token = tokens.remove(0);
+    	System.out.println(tokens);
     	counter++;
         return token.getType();
     }
@@ -124,7 +127,8 @@ public class Parser {
             fromFile2Rule();
             match("eof");
         } else {
-            error(expected.toString()+expected.toString());
+            error(getCurrentToken(),
+            		expected.toString()+expected.toString());
         }
     }
 
@@ -147,7 +151,8 @@ public class Parser {
         } else if (expected2.contains(getCurrentToken())) {
             match("newline");
         } else {
-            error(expected.toString()+expected2.toString());
+            error(getCurrentToken(),
+            		expected.toString()+expected2.toString());
         }
     }
 
@@ -160,7 +165,8 @@ public class Parser {
         } else if (expected2.contains(getCurrentToken())) {
             compoundStatRule();
         } else {
-            error(expected.toString()+expected2.toString());
+            error(getCurrentToken(),
+            		expected.toString()+expected2.toString());
         }
     }
 
@@ -179,7 +185,7 @@ public class Parser {
         } else if (expected4.contains(getCurrentToken())) {
             funcionRule();
         } else {
-            error(
+            error( getCurrentToken(),
                     expected.toString()+
                     expected2.toString()+
                     expected3.toString()+
@@ -207,7 +213,8 @@ public class Parser {
         } else if (expected5.contains(getCurrentToken())) {
             match("other");
         } else {
-            error(expected.toString()+
+            error( getCurrentToken(),
+            		expected.toString()+
                     expected2.toString()+
                     expected3.toString()+
                     expected4.toString()+
@@ -224,7 +231,7 @@ public class Parser {
             match("assign");
             assignment2Rule();
         } else {
-            error(expected.toString());
+            error( getCurrentToken(), expected.toString());
         }
     }
 
@@ -237,7 +244,7 @@ public class Parser {
         } else if (expected2.contains(getCurrentToken())) {
             exprRule();
         } else {
-            error(expected.toString()+expected2.toString());
+            error( getCurrentToken(), expected.toString()+expected2.toString());
         }
     }
 
@@ -250,7 +257,7 @@ public class Parser {
             ifStat2Rule();
             ifStat3Rule();
         } else {
-            error(expected.toString());
+            error( getCurrentToken(), expected.toString());
         }
     }
 
@@ -280,7 +287,7 @@ public class Parser {
             match("if");
             conditionBlockRule();
         } else {
-            error(expected.toString());
+            error( getCurrentToken(), expected.toString());
         }
     }
 
@@ -292,7 +299,7 @@ public class Parser {
             exprRule();
             statBlockRule();
         } else {
-            error(expected.toString());
+            error(getCurrentToken(),expected.toString());
         }
     }
 
@@ -304,7 +311,7 @@ public class Parser {
             exprRule();
             statBlockRule();
         } else{
-            error("for");
+            error(getCurrentToken(), "for");
         }
     }
 
@@ -315,7 +322,7 @@ public class Parser {
             exprRule();
             match("cpar");
         }else{
-            error("log");
+            error( getCurrentToken(), "log");
         }
     }
 
@@ -359,7 +366,7 @@ public class Parser {
             match("newline");
         }else 
         {
-            error(expected1.toString()+ expected2.toString());
+            error(getCurrentToken(),expected1.toString()+ expected2.toString());
         }
     }
     
@@ -373,7 +380,7 @@ public class Parser {
             match("ckey");
         } else 
         {
-            error(expected1.toString());
+            error(getCurrentToken(),expected1.toString());
         }
     }
     
@@ -406,7 +413,7 @@ public class Parser {
         	exprRule();
         } else 
         {
-            error(expected1.toString());
+            error(getCurrentToken(),expected1.toString());
         }
     }
 
@@ -416,7 +423,7 @@ public class Parser {
             match("id");
             variable1Rule();
         }
-        else error("id");
+        else error(getCurrentToken(),"id");
 
     }
 
@@ -444,7 +451,7 @@ public class Parser {
             exprRule();
         }
 
-        else error("comma");
+        else error(getCurrentToken(),"comma");
 
 
     }
@@ -459,7 +466,7 @@ public class Parser {
             match("point");
             match("id");
         }
-        else error("point");
+        else error(getCurrentToken(),"point");
     }
 
 
@@ -479,7 +486,7 @@ public class Parser {
                 variable1Rule();
                 exprRule();
                 match("ckey");
-            } else error("okey");
+            } else error(getCurrentToken(),"okey");
         }
     }
 
@@ -496,7 +503,7 @@ public class Parser {
             match("id");
         }
 
-        else error("point");
+        else error(getCurrentToken(),"point");
     }
 
 
@@ -512,7 +519,7 @@ public class Parser {
         	parametro2Rule();
         } else 
         {
-            error( 
+            error( getCurrentToken(),
                 expected1.toString() +
                 expected2.toString()
                 );
@@ -549,7 +556,7 @@ public class Parser {
             expr1Rule();
         } else 
         {
-            error( expected1.toString() + expected2.toString() + expected3.toString() );
+            error( getCurrentToken(), expected1.toString() + expected2.toString() + expected3.toString() );
         }
     }
 
@@ -576,7 +583,7 @@ public class Parser {
             match("not");
         } else 
         {
-            error( expected1.toString() + expected2.toString() );
+            error( getCurrentToken(), expected1.toString() + expected2.toString() );
         }
     }
     
@@ -609,7 +616,7 @@ public class Parser {
             match("pow");
         }else 
         {
-            error( 
+            error( getCurrentToken(),
                 expected1.toString() + 
                 expected2.toString() + 
                 expected3.toString() + 
@@ -635,7 +642,7 @@ public class Parser {
             match("mod");
         } else 
         {
-            error( expected1.toString() + expected2.toString() + expected3.toString() );
+            error( getCurrentToken(), expected1.toString() + expected2.toString() + expected3.toString() );
         }
     }
 
@@ -651,7 +658,7 @@ public class Parser {
             match("minus");
         } else 
         {
-            error( expected1.toString() + expected2.toString() );
+            error( getCurrentToken(), expected1.toString() + expected2.toString() );
         }
     }
 
@@ -670,7 +677,7 @@ public class Parser {
         }else if(prediction.get(rules.get(36)).contains(getCurrentToken())){
             statRule();
         }else{
-            error(prediction.get(rules.get(36)).toString() + " token_newline");
+            error(getCurrentToken(),prediction.get(rules.get(36)).toString() + " token_newline");
         }
     }
 
@@ -679,7 +686,7 @@ public class Parser {
             match("token_coma");
             parametroRule();
         }else{
-            error("token_coma");
+            error(getCurrentToken(),"token_coma");
         }
     }
 
@@ -691,7 +698,7 @@ public class Parser {
             match("cpar");
             match("newline");
         }else{
-            error("retorno");
+            error(getCurrentToken(),"retorno");
         }
     }
 
@@ -701,7 +708,7 @@ public class Parser {
             conditionBlock2Rule();
             statBlockRule();
         }else{
-            error(prediction.get(rules.get(39)).toString());
+            error(getCurrentToken(),prediction.get(rules.get(39)).toString());
         }
     }
     public void conditionBlock2Rule(){
@@ -719,7 +726,7 @@ public class Parser {
             statRule();
             match("newline");
         }else{
-            error(prediction.get(rules.get(43)).toString() + " obrace");
+            error(getCurrentToken(),prediction.get(rules.get(43)).toString() + " obrace");
         }
     }
 
@@ -740,7 +747,7 @@ public class Parser {
         if (token.contains(getCurrentToken())){
             match(getCurrentToken());
         } else{
-            error( token);
+            error(getCurrentToken(),token);
         }
     }
 
@@ -748,7 +755,7 @@ public class Parser {
         if (getCurrentToken().equals("eq") || getCurrentToken().equals("neq")){
             match(getCurrentToken());
         }else{
-            error("eq, neq");
+            error(getCurrentToken(),"eq, neq");
         }
     }
 
@@ -756,7 +763,7 @@ public class Parser {
         if (getCurrentToken().equals("and") || getCurrentToken().equals("or")){
             match(getCurrentToken());
         } else{
-            error("and, or");
+            error(getCurrentToken(),"and, or");
         }
     }
 
@@ -772,7 +779,7 @@ public class Parser {
             match("okey");
             arrayRule();
         }else{
-            error(expectedTokens + " id" + " okey");
+            error(getCurrentToken(), expectedTokens + " id" + " okey");
         }
     }
 
@@ -787,9 +794,10 @@ public class Parser {
     }
 
 
-    public void error(String token){
+    public void error(String token_in, String token){
 
-        System.out.println("Error sintactico se esperaba: " + token );
+    	System.out.println("Error sintactico se encontro: " + token );
+    	System.out.println("; se esperaba: " + token );
         System.exit(0);
 
     }
@@ -798,14 +806,14 @@ public class Parser {
         if (getCurrentToken().equals(predictionToken)){
             setCurrentToken(getToken());
         }else{
-            error(predictionToken);
+            error( getCurrentToken(), predictionToken);
         }
     }
 
     public void init(){
         fromFileRule();
         if (!getCurrentToken().equals(END_OF_FILE)){
-            error(END_OF_FILE);
+            error(getCurrentToken(),END_OF_FILE);
         }
     }
     /**
