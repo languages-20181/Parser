@@ -1,4 +1,4 @@
-FROM_FILE -> FROM_FILE2 eof
+FROM_FILE -> FROM_FILE2
 FROM_FILE2 -> epsilon | FROM_FILE3 FROM_FILE2
 FROM_FILE3 -> STAT | newline
 STAT -> SIMPLE_STAT | COMPOUND_STAT
@@ -13,13 +13,13 @@ IF_STAT4 -> else if CONDITION_BLOCK
 WHILE_STAT -> while EXPR STAT_BLOCK
 FOR_STAT -> for id in EXPR STAT_BLOCK
 LOG -> log opar EXPR cpar
-FUNCION -> funcion id token_par_izq FUNCION2 token_par_der FUNCION3 end funcion
+FUNCION -> funcion id opar FUNCION2 cpar FUNCION3 end funcion
 FUNCION2 -> epsilon | PARAMETRO FUNCION4
 FUNCION3 -> epsilon | FUNCION5 FUNCION3
 FUNCION4 -> epsilon | FUNCION6 FUNCION4
-FUNCION5 -> token_newline | STAT
-FUNCION6 -> token_coma PARAMETRO
-RETORNAR -> retorno opar EXPR cpar newline
+FUNCION5 -> epsilon | STAT
+FUNCION6 -> comma PARAMETRO
+RETORNAR -> retorno opar EXPR cpar
 CONDITION_BLOCK -> EXPR CONDITION_BLOCK2 STAT_BLOCK
 CONDITION_BLOCK2 -> epsilon | newline
 STAT_BLOCK -> obrace STAT_BLOCK1 cbrace
@@ -55,4 +55,4 @@ OPSUM -> plus | minus
 OPREL -> lteq | gteq | lt | gt
 OPEQ -> eq | neq
 OPLOG -> and | or
- ATOM -> int | float | true | false | string | ARRAY | VARIABLE | nil
+ ATOM -> int | float | true | false | string | ARRAY | VARIABLE | nil | epsilon | id
