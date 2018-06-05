@@ -1,1 +1,4 @@
-Log(34)
+while a < 5 {
+log(a)
+a=a+1
+}

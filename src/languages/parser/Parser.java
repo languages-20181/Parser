@@ -217,12 +217,12 @@ public class Parser {
         HashSet<String> expected = prediction.get(rules.get(17));
         HashSet<String> expected2 = prediction.get(rules.get(18));
 
-        if (expected.contains( getCurrentToken().getType() ) )
-        {
-            assignmentRule();
-        } else if ( expected2.contains(getCurrentToken().getType() ) ) 
+        if (expected2.contains( getCurrentToken().getType() ) )
         {
             exprRule();
+        } else if ( expected.contains(getCurrentToken().getType() ) )
+        {
+            assignmentRule();
         } else {
             error( getCurrentToken(), expected.toString()+expected2.toString());
         }
