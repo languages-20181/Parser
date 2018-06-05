@@ -314,6 +314,12 @@ public class Lexer {
 
         String token = substring[0];
 
+        if (esMalReservada(token)){
+            imprimirError(true);
+
+        }
+
+
         String identificador = esIdentificador(token);
 
         if (esCadena(token)) {
@@ -391,6 +397,18 @@ public class Lexer {
             imprimirError();*/
 
         return false;
+    }
+
+    public static boolean esMalReservada(String substring){
+        if(palabraReservada.contains(substring)){
+            return false;
+        }else{
+            if(palabraReservada.contains(substring.toUpperCase()) || palabraReservada.contains(substring.toLowerCase())){
+                System.out.println("se encontro " + substring + ";" + " se esperaba" + substring.toLowerCase());
+                return true;
+            }
+            return false;
+        }
     }
 
     public static boolean esComentario(String substring) {
