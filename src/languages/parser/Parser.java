@@ -45,6 +45,7 @@ public class Parser {
     private Token currentToken;
     private ArrayList<Token> tokens;
     private int counter;
+    Scanner data;
 
     /*
      * Initializes a newly created {@code Parser} object
@@ -427,7 +428,8 @@ public class Parser {
     }
 
     public void variable1Rule(){
-        if(getCurrentToken().equals("point")) {
+        if( getCurrentToken().getType().equals("point") ) 
+        {
             variable2Rule();
             variable1Rule();
         }
@@ -902,7 +904,7 @@ public class Parser {
     private void parseRules(File grammarFile) throws FileNotFoundException {
         nameToSymbol.put("EPSILON", epsilon);
 
-        Scanner data = new Scanner(grammarFile);
+        data = new Scanner(grammarFile);
         int code = 1;
         int ruleNumber = 0;
         while (data.hasNext()) {
