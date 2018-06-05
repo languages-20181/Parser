@@ -13,12 +13,12 @@ IF_STAT4 -> else if CONDITION_BLOCK
 WHILE_STAT -> while EXPR STAT_BLOCK
 FOR_STAT -> for id in EXPR STAT_BLOCK
 LOG -> log opar EXPR cpar
-FUNCION -> funcion id token_par_izq FUNCION2 token_par_der FUNCION3 end funcion
+FUNCION -> funcion id opar FUNCION2 cpar FUNCION3 end funcion
 FUNCION2 -> epsilon | PARAMETRO FUNCION4
 FUNCION3 -> epsilon | FUNCION5 FUNCION3
 FUNCION4 -> epsilon | FUNCION6 FUNCION4
-FUNCION5 -> token_newline | STAT
-FUNCION6 -> token_coma PARAMETRO
+FUNCION5 -> newline | STAT
+FUNCION6 -> comma PARAMETRO
 RETORNAR -> retorno opar EXPR cpar newline
 CONDITION_BLOCK -> EXPR CONDITION_BLOCK2 STAT_BLOCK
 CONDITION_BLOCK2 -> epsilon | newline

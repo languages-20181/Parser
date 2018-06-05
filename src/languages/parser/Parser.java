@@ -330,9 +330,9 @@ public class Parser {
         if(getCurrentToken().equals("funcion")){
             match("funcion");
             match("id");
-            match("token_par_izq");
+            match("opar");
             funcion2Rule();
-            match("token_par_der");
+            match("cpar");
 
             funcion3Rule();
             match("end");
@@ -421,7 +421,7 @@ public class Parser {
     public void variableRule(){
         if(getCurrentToken().equals("id")) {
             match("id");
-            variable1Rule();
+            variableRule();
         }
         else error(getCurrentToken(),"id");
 
@@ -664,29 +664,29 @@ public class Parser {
 
 
     public void funcion4Rule(){
-        if (getCurrentToken().equals("token_coma")){
-            match("token_coma");
+        if (getCurrentToken().equals("comma")){
+            match("comma");
             funcion6Rule();
             funcion4Rule();
         }
     }
 
     public void funcion5Rule(){
-        if( getCurrentToken().equals("token_newline")){
-            match("token_newline");
+        if( getCurrentToken().equals("newline")){
+            match("newline");
         }else if(prediction.get(rules.get(36)).contains(getCurrentToken())){
             statRule();
         }else{
-            error(getCurrentToken(),prediction.get(rules.get(36)).toString() + " token_newline");
+            error(getCurrentToken(),prediction.get(rules.get(36)).toString() + "newline");
         }
     }
 
     public void funcion6Rule(){
-        if(getCurrentToken().equals("token_coma")){
-            match("token_coma");
+        if(getCurrentToken().equals("comma")){
+            match("comma");
             parametroRule();
         }else{
-            error(getCurrentToken(),"token_coma");
+            error(getCurrentToken(),"comma");
         }
     }
 
@@ -796,7 +796,7 @@ public class Parser {
 
     public void error(String token_in, String token){
 
-    	System.out.println("Error sintactico se encontro: " + token );
+    	System.out.println("Error sintactico se encontro: " + token_in );
     	System.out.println("; se esperaba: " + token );
         System.exit(0);
 
