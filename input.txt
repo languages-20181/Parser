@@ -1,3 +1,4 @@
-funcion suma(x,y)
-retorno (x+y)
-end
+WHILE a < 5 {
+log(a)
+a=a+1
+}
